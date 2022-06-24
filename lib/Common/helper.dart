@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class Helpers {
-  static final String baseUrl = "https://chandrachaan.in/randac/api/";
-  static final String login = "login";
+  static final String baseUrl = "https://original-morals.herokuapp.com/api/";
+  static final String login = "user/login";
 
   String convertToBase64(String credentials) {
     final Codec<String, String> stringToBase64 = utf8.fuse(base64);

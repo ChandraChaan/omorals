@@ -43,7 +43,10 @@ class LoginController extends GetxController {
       //         ? "None"
       //         : data.results['last_name'].toString());
       //
-      // LocalDb.write('userid', '${data.results['data']['id'].toString()}');
+      // Get.defaultDialog(
+      //     title: '${data.results['userName'].toString()}');
+      LocalDb.write(
+          'userName', '${data.results['userName'].toString()}');
       Get.toNamed(Routes.homePageView);
     }, onError: (err) {
       Get.back();

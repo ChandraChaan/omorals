@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:omorals/Presentation/dashBoard/slideShowView.dart';
 
 class HomePageView extends StatefulWidget {
@@ -19,7 +20,10 @@ class _HomePageViewState extends State<HomePageView> {
             SizedBox(
               height: 50,
             ),
-
+            Text(
+              'Well Come ' + GetStorage().read('userName').toString(),
+              style: Theme.of(context).textTheme.headline1,
+            )
           ],
         ),
       ),
