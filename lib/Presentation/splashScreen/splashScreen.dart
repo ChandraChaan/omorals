@@ -14,7 +14,7 @@ class _splashScreenState extends State<splashScreen> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 5), () {
-      Get.offAllNamed(Routes.login);
+      Get.offAllNamed(Routes.homePageView);
     });
   }
 
@@ -25,7 +25,7 @@ class _splashScreenState extends State<splashScreen> {
           height: MediaQuery.of(context).size.height,
           child: Image.asset(
             'assets/images/splashScreen_flutter.jpg',
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.fill,
           )),
     );
   }
