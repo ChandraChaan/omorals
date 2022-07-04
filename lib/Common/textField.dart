@@ -127,3 +127,39 @@ class _UiFormTextState extends State<UiFormText> {
     );
   }
 }
+
+class TextReuse extends StatelessWidget {
+  final String hint;
+  final IconData? icon;
+  final TextEditingController? controller;
+
+  const TextReuse({required this.hint, this.icon, this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: TextField(
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          hintText: " $hint",
+          prefixIcon: Icon(
+            icon,
+            color: Colors.white,
+          ),
+          hintStyle: TextStyle(color: Colors.white),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+        ),
+        controller: controller,
+      ),
+    );
+  }
+}
