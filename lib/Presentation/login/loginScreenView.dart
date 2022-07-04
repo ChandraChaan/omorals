@@ -91,71 +91,71 @@ class _loginScreenState extends State<loginScreen> {
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                width: getWidth(context),
-                                height: 45,
-                                color: ColorElement.white900,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        width: 20,
-                                        height: 45,
-                                        child: Image.asset(localimages
-                                            .img_google_logos) //SvgPicture.asset(img_google_logo),
-                                        ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Use Google Account",
-                                      style: TextStyle(
-                                          fontSize: textSizeSmallMedium,
-                                          color: colorBlack,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    width: getWidth(context),
-                                    height: 1,
-                                    color: colorBlack,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10),
-                                  child: Text(
-                                    "Or",
-                                    style: TextStyle(
-                                        fontSize: textSizeSmallMedium),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    width: getWidth(context),
-                                    height: 1,
-                                    color: colorBlack,
-                                  ),
-                                )
-                              ],
-                            ),
+                            // SizedBox(
+                            //   height: 15,
+                            // ),
+                            // InkWell(
+                            //   onTap: () {},
+                            //   child: Container(
+                            //     width: getWidth(context),
+                            //     height: 45,
+                            //     color: ColorElement.white900,
+                            //     child: Row(
+                            //       mainAxisAlignment: MainAxisAlignment.center,
+                            //       crossAxisAlignment: CrossAxisAlignment.center,
+                            //       children: [
+                            //         Container(
+                            //             width: 20,
+                            //             height: 45,
+                            //             child: Image.asset(localimages
+                            //                 .img_google_logos) //SvgPicture.asset(img_google_logo),
+                            //             ),
+                            //         SizedBox(
+                            //           width: 10,
+                            //         ),
+                            //         Text(
+                            //           "Use Google Account",
+                            //           style: TextStyle(
+                            //               fontSize: textSizeSmallMedium,
+                            //               color: colorBlack,
+                            //               fontWeight: FontWeight.w500),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   height: 20,
+                            // ),
+                            // Row(
+                            //   children: [
+                            //     Expanded(
+                            //       flex: 1,
+                            //       child: Container(
+                            //         width: getWidth(context),
+                            //         height: 1,
+                            //         color: colorBlack,
+                            //       ),
+                            //     ),
+                            //     Padding(
+                            //       padding: const EdgeInsets.only(
+                            //           left: 10, right: 10),
+                            //       child: Text(
+                            //         "Or",
+                            //         style: TextStyle(
+                            //             fontSize: textSizeSmallMedium),
+                            //       ),
+                            //     ),
+                            //     Expanded(
+                            //       flex: 1,
+                            //       child: Container(
+                            //         width: getWidth(context),
+                            //         height: 1,
+                            //         color: colorBlack,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
                             SizedBox(
                               height: 20,
                             ),
@@ -366,116 +366,116 @@ class _loginScreenState extends State<loginScreen> {
                             SizedBox(
                               height: 30,
                             ),
-                            Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Also Log in with",
-                                  style: TextStyle(fontSize: textSizeSMedium),
-                                )),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CircleAvatar(
-                                  radius: 10,
-                                  backgroundColor: c_White,
-                                  child: Image.asset(localimages
-                                      .img_google_logos), //SvgPicture.asset(img_google_logo),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: c_White,
-                                  child: Icon(
-                                    Icons.facebook,
-                                    color: button_blueColor,
-                                    size: 32,
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Container(
-                              width: getWidth(context),
-                              height: 20,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: InkWell(
-                                        onTap: () {
-                                          print('termsAndCondition');
-                                        },
-                                        child: Text(
-                                          "Terms",
-                                          style: TextStyle(
-                                              fontSize: textSizeSmallMedium,
-                                              fontWeight: fontSemibold),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        "|",
-                                        style: TextStyle(
-                                            fontSize: textSizeSmallMedium,
-                                            fontWeight: fontSemibold,
-                                            color: colorBlack),
-                                      ),
-                                    ),
-                                  ),
-                                  Center(
-                                    child: InkWell(
-                                      onTap: () {
-                                        print('privacyPolicy');
-                                      },
-                                      child: Text(
-                                        "Privacy policy",
-                                        style: TextStyle(
-                                            fontSize: textSizeSmallMedium,
-                                            fontWeight: fontSemibold),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        "|",
-                                        style: TextStyle(
-                                            fontSize: textSizeSmallMedium,
-                                            fontWeight: fontSemibold,
-                                            color: colorBlack),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: InkWell(
-                                        onTap: () {},
-                                        child: Text(
-                                          "Support",
-                                          style: TextStyle(
-                                              fontSize: textSizeSmallMedium,
-                                              fontWeight: fontSemibold),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // Align(
+                            //     alignment: Alignment.center,
+                            //     child: Text(
+                            //       "Also Log in with",
+                            //       style: TextStyle(fontSize: textSizeSMedium),
+                            //     )),
+                            // SizedBox(
+                            //   height: 20,
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     CircleAvatar(
+                            //       radius: 10,
+                            //       backgroundColor: c_White,
+                            //       child: Image.asset(localimages
+                            //           .img_google_logos), //SvgPicture.asset(img_google_logo),
+                            //     ),
+                            //     SizedBox(
+                            //       width: 10,
+                            //     ),
+                            //     CircleAvatar(
+                            //       radius: 20,
+                            //       backgroundColor: c_White,
+                            //       child: Icon(
+                            //         Icons.facebook,
+                            //         color: button_blueColor,
+                            //         size: 32,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
+                            // SizedBox(
+                            //   height: 30,
+                            // ),
+                            // Container(
+                            //   width: getWidth(context),
+                            //   height: 20,
+                            //   child: Row(
+                            //     children: [
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: InkWell(
+                            //             onTap: () {
+                            //               print('termsAndCondition');
+                            //             },
+                            //             child: Text(
+                            //               "Terms",
+                            //               style: TextStyle(
+                            //                   fontSize: textSizeSmallMedium,
+                            //                   fontWeight: fontSemibold),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: Text(
+                            //             "|",
+                            //             style: TextStyle(
+                            //                 fontSize: textSizeSmallMedium,
+                            //                 fontWeight: fontSemibold,
+                            //                 color: colorBlack),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Center(
+                            //         child: InkWell(
+                            //           onTap: () {
+                            //             print('privacyPolicy');
+                            //           },
+                            //           child: Text(
+                            //             "Privacy policy",
+                            //             style: TextStyle(
+                            //                 fontSize: textSizeSmallMedium,
+                            //                 fontWeight: fontSemibold),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: Text(
+                            //             "|",
+                            //             style: TextStyle(
+                            //                 fontSize: textSizeSmallMedium,
+                            //                 fontWeight: fontSemibold,
+                            //                 color: colorBlack),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: InkWell(
+                            //             onTap: () {},
+                            //             child: Text(
+                            //               "Support",
+                            //               style: TextStyle(
+                            //                   fontSize: textSizeSmallMedium,
+                            //                   fontWeight: fontSemibold),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ],
                         ),
                       )
@@ -551,77 +551,77 @@ class _loginScreenState extends State<loginScreen> {
                                   fontSize: textSizeXXXLarge,
                                   fontWeight: fontBold),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: SizedBox(
-                                height: 86,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                width: getWidth(context),
-                                height: 45,
-                                color: c_White,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 25,
-                                      height: 45,
-                                      child: Image.asset(
-                                          localimages.img_google_logos),
-
-                                      // SvgPicture.asset(
-                                      //   img_google_logo,
-                                      //   fit: BoxFit.contain,
-                                      // ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Use Google Account",
-                                      style:
-                                          TextStyle(fontSize: textSizeSMedium),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    width: getWidth(context),
-                                    height: 1,
-                                    color: colorBlack,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10),
-                                  child: Text(
-                                    "Or",
-                                    style: TextStyle(
-                                        fontSize: textSizeSmallMedium),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    width: getWidth(context),
-                                    height: 1,
-                                    color: colorBlack,
-                                  ),
-                                )
-                              ],
-                            ),
+                            // Expanded(
+                            //   flex: 1,
+                            //   child: SizedBox(
+                            //     height: 86,
+                            //   ),
+                            // ),
+                            // InkWell(
+                            //   onTap: () {},
+                            //   child: Container(
+                            //     width: getWidth(context),
+                            //     height: 45,
+                            //     color: c_White,
+                            //     child: Row(
+                            //       mainAxisAlignment: MainAxisAlignment.center,
+                            //       crossAxisAlignment: CrossAxisAlignment.center,
+                            //       children: [
+                            //         Container(
+                            //           width: 25,
+                            //           height: 45,
+                            //           child: Image.asset(
+                            //               localimages.img_google_logos),
+                            //
+                            //           // SvgPicture.asset(
+                            //           //   img_google_logo,
+                            //           //   fit: BoxFit.contain,
+                            //           // ),
+                            //         ),
+                            //         SizedBox(
+                            //           width: 10,
+                            //         ),
+                            //         Text(
+                            //           "Use Google Account",
+                            //           style:
+                            //               TextStyle(fontSize: textSizeSMedium),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   height: 10,
+                            // ),
+                            // Row(
+                            //   children: [
+                            //     Expanded(
+                            //       flex: 1,
+                            //       child: Container(
+                            //         width: getWidth(context),
+                            //         height: 1,
+                            //         color: colorBlack,
+                            //       ),
+                            //     ),
+                            //     Padding(
+                            //       padding: const EdgeInsets.only(
+                            //           left: 10, right: 10),
+                            //       child: Text(
+                            //         "Or",
+                            //         style: TextStyle(
+                            //             fontSize: textSizeSmallMedium),
+                            //       ),
+                            //     ),
+                            //     Expanded(
+                            //       flex: 1,
+                            //       child: Container(
+                            //         width: getWidth(context),
+                            //         height: 1,
+                            //         color: colorBlack,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
                             Expanded(
                               flex: 1,
                               child: SizedBox(
@@ -856,130 +856,130 @@ class _loginScreenState extends State<loginScreen> {
                                 height: 86,
                               ),
                             ),
-                            Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Also Log in with",
-                                  style: TextStyle(fontSize: textSizeSMedium),
-                                )),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CircleAvatar(
-                                  radius: 14,
-                                  backgroundColor: c_White,
-                                  child: Image.asset(localimages
-                                      .img_google_logos), //SvgPicture.asset(img_google_logo),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                CircleAvatar(
-                                  radius: 24,
-                                  backgroundColor: c_White,
-                                  child: Icon(
-                                    Icons.facebook,
-                                    color: button_blueColor,
-                                    size: 32,
-                                  ),
-                                )
-                              ],
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: SizedBox(
-                                height: 86,
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: SizedBox(
-                                height: 86,
-                              ),
-                            ),
-                            Container(
-                              width: getWidth(context),
-                              height: 20,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: InkWell(
-                                        onTap: () {
-                                          print('termsAndCondition');
-                                          // print('termsAndCondition');
-                                        },
-                                        child: Text(
-                                          "Terms",
-                                          style: TextStyle(
-                                              fontSize: textSizeSMedium,
-                                              fontWeight: fontSemibold),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        "|",
-                                        style: TextStyle(
-                                            fontSize: textSizeSMedium,
-                                            fontWeight: fontSemibold,
-                                            color: colorBlack),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: InkWell(
-                                        onTap: () {
-                                          print('privacyPolicy');
-                                          // print('privacyPolicy');
-                                        },
-                                        child: Text(
-                                          "Privacy policy",
-                                          style: TextStyle(
-                                              fontSize: textSizeSMedium,
-                                              fontWeight: fontSemibold),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        "|",
-                                        style: TextStyle(
-                                            fontSize: textSizeSMedium,
-                                            fontWeight: fontSemibold,
-                                            color: colorBlack),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: InkWell(
-                                        onTap: () {},
-                                        child: Text(
-                                          "Support",
-                                          style: TextStyle(
-                                              fontSize: textSizeSMedium,
-                                              fontWeight: fontSemibold),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // Align(
+                            //     alignment: Alignment.center,
+                            //     child: Text(
+                            //       "Also Log in with",
+                            //       style: TextStyle(fontSize: textSizeSMedium),
+                            //     )),
+                            // SizedBox(
+                            //   height: 10,
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     CircleAvatar(
+                            //       radius: 14,
+                            //       backgroundColor: c_White,
+                            //       child: Image.asset(localimages
+                            //           .img_google_logos), //SvgPicture.asset(img_google_logo),
+                            //     ),
+                            //     SizedBox(
+                            //       width: 10,
+                            //     ),
+                            //     CircleAvatar(
+                            //       radius: 24,
+                            //       backgroundColor: c_White,
+                            //       child: Icon(
+                            //         Icons.facebook,
+                            //         color: button_blueColor,
+                            //         size: 32,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
+                            // Expanded(
+                            //   flex: 1,
+                            //   child: SizedBox(
+                            //     height: 86,
+                            //   ),
+                            // ),
+                            // Expanded(
+                            //   flex: 1,
+                            //   child: SizedBox(
+                            //     height: 86,
+                            //   ),
+                            // ),
+                            // Container(
+                            //   width: getWidth(context),
+                            //   height: 20,
+                            //   child: Row(
+                            //     children: [
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: InkWell(
+                            //             onTap: () {
+                            //               print('termsAndCondition');
+                            //               // print('termsAndCondition');
+                            //             },
+                            //             child: Text(
+                            //               "Terms",
+                            //               style: TextStyle(
+                            //                   fontSize: textSizeSMedium,
+                            //                   fontWeight: fontSemibold),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: Text(
+                            //             "|",
+                            //             style: TextStyle(
+                            //                 fontSize: textSizeSMedium,
+                            //                 fontWeight: fontSemibold,
+                            //                 color: colorBlack),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: InkWell(
+                            //             onTap: () {
+                            //               print('privacyPolicy');
+                            //               // print('privacyPolicy');
+                            //             },
+                            //             child: Text(
+                            //               "Privacy policy",
+                            //               style: TextStyle(
+                            //                   fontSize: textSizeSMedium,
+                            //                   fontWeight: fontSemibold),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: Text(
+                            //             "|",
+                            //             style: TextStyle(
+                            //                 fontSize: textSizeSMedium,
+                            //                 fontWeight: fontSemibold,
+                            //                 color: colorBlack),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 1,
+                            //         child: Center(
+                            //           child: InkWell(
+                            //             onTap: () {},
+                            //             child: Text(
+                            //               "Support",
+                            //               style: TextStyle(
+                            //                   fontSize: textSizeSMedium,
+                            //                   fontWeight: fontSemibold),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
