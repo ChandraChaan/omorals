@@ -28,6 +28,10 @@ class MoralsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(
+          scrollbarTheme: ScrollbarThemeData(
+        trackVisibility: MaterialStateProperty.all<bool>(true),
+      )),
       debugShowCheckedModeBanner: false,
       title: 'Original Morals',
       logWriterCallback: Logger.write,
