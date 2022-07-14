@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
+import '../autherPage/autherPage.dart';
+
 class HomePageView extends StatefulWidget {
   @override
   State<HomePageView> createState() => _HomePageViewState();
@@ -56,33 +58,79 @@ class _HomePageViewState extends State<HomePageView> {
                 child: GetStorage().read('userName') == null
                     ? Padding(
                         padding: EdgeInsets.only(
-                            top: 12,
-                            bottom: 12,
-                            right: double.parse(
-                                (MediaQuery.of(context).size.width / 5)
-                                    .toString())),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                              style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
-                                    const EdgeInsets.all(0)),
-                                elevation: MaterialStateProperty.all(8),
-                                // shape: MaterialStateProperty.all(
-                                //     RoundedRectangleBorder(
-                                //         borderRadius: BorderRadius.circular(50))),
-                                backgroundColor: MaterialStateProperty.all(
-                                    Color(0xff9ef9fe)),
-                                shadowColor: MaterialStateProperty.all(
-                                    Theme.of(context).colorScheme.onSurface),
-                              ),
-                              onPressed: () {
-                                Get.toNamed(Routes.login);
-                              },
-                              child: Text(
-                                'Sign in',
-                                style: TextStyle(color: Color(0xff271a83)),
-                              )),
+                          top: 12,
+                          bottom: 12,
+                          right: double.parse(
+                              (MediaQuery.of(context).size.width / 5)
+                                  .toString()),
+                          left: double.parse(
+                              (MediaQuery.of(context).size.width / 5)
+                                  .toString()),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                                style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      const EdgeInsets.all(0)),
+                                  elevation: MaterialStateProperty.all(8),
+                                  // shape: MaterialStateProperty.all(
+                                  //     RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(50))),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Color(0xff9ef9fe)),
+                                  shadowColor: MaterialStateProperty.all(
+                                      Theme.of(context).colorScheme.onSurface),
+                                ),
+                                onPressed: () {
+                                  Get.toNamed(Routes.autherPage);
+                                },
+                                child: Text(
+                                  'Author',
+                                  style: TextStyle(color: Color(0xff271a83)),
+                                )),
+                            TextButton(
+                                style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      const EdgeInsets.all(0)),
+                                  elevation: MaterialStateProperty.all(8),
+                                  // shape: MaterialStateProperty.all(
+                                  //     RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(50))),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Color(0xff9ef9fe)),
+                                  shadowColor: MaterialStateProperty.all(
+                                      Theme.of(context).colorScheme.onSurface),
+                                ),
+                                onPressed: () {
+                                  Get.toNamed(Routes.voicePage);
+                                },
+                                child: Text(
+                                  'Voice',
+                                  style: TextStyle(color: Color(0xff271a83)),
+                                )),
+                            TextButton(
+                                style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      const EdgeInsets.all(0)),
+                                  elevation: MaterialStateProperty.all(8),
+                                  // shape: MaterialStateProperty.all(
+                                  //     RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(50))),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Color(0xff9ef9fe)),
+                                  shadowColor: MaterialStateProperty.all(
+                                      Theme.of(context).colorScheme.onSurface),
+                                ),
+                                onPressed: () {
+                                  Get.toNamed(Routes.login);
+                                },
+                                child: Text(
+                                  'Sign in',
+                                  style: TextStyle(color: Color(0xff271a83)),
+                                )),
+                          ],
                         ),
                       )
                     : Text('WellCome'),
