@@ -93,42 +93,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Color(0xFF170302), Color(0xFF901a16)])),
+                colors: [Color(0xff271a83), Color(0xff9ef9fe)])),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              Expanded(
-                  flex: 10,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: TextReuse(
-                          hint: 'Username',
-                          icon: Icons.person,
-                          controller: username,
-                        ),
+          child: SingleChildScrollView(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: TextReuse(
+                        hint: 'Username',
+                        icon: Icons.person,
+                        controller: username,
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: TextReuse(
-                          hint: 'Password',
-                          icon: Icons.lock,
-                          controller: passw,
-                        ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: TextReuse(
+                        hint: 'Password',
+                        icon: Icons.lock,
+                        controller: passw,
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: TextReuse(
-                          hint: 'Email',
-                          icon: Icons.email,
-                          controller: emailcontroller,
-                        ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: TextReuse(
+                        hint: 'Email',
+                        icon: Icons.email,
+                        controller: emailcontroller,
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.2,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -152,174 +155,118 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Gender : ',
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            'Gender : ',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Center(
+                            child: DropdownButton(
+                              dropdownColor: Colors.black,
                               style: TextStyle(color: Colors.white),
+                              hint: Text('Please choose a option'),
+                              value: gende,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  gende = newValue;
+                                });
+                              },
+                              items: ['Select', 'Male', 'Female', 'Other']
+                                  .map((location) {
+                                return DropdownMenuItem(
+                                  child: new Text(location),
+                                  value: location,
+                                );
+                              }).toList(),
                             ),
-                            Center(
-                              child: DropdownButton(
-                                dropdownColor: Colors.black,
-                                style: TextStyle(color: Colors.white),
-                                hint: Text('Please choose a option'),
-                                value: gende,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    gende = newValue;
-                                  });
-                                },
-                                items: ['Select', 'Male', 'Female', 'Other']
-                                    .map((location) {
-                                  return DropdownMenuItem(
-                                    child: new Text(location),
-                                    value: location,
-                                  );
-                                }).toList(),
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Role : ',
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            'Role : ',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Center(
+                            child: DropdownButton(
+                              dropdownColor: Colors.black,
                               style: TextStyle(color: Colors.white),
+                              hint: Text('Please choose a option'),
+                              value: role,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  role = newValue.toString();
+                                });
+                              },
+                              items: [
+                                'Select',
+                                'Author',
+                                'Editor',
+                                'Voice-artist',
+                                'Translator',
+                                'Quality'
+                              ].map((location) {
+                                return DropdownMenuItem(
+                                  child: new Text(location),
+                                  value: location,
+                                );
+                              }).toList(),
                             ),
-                            Center(
-                              child: DropdownButton(
-                                dropdownColor: Colors.black,
-                                style: TextStyle(color: Colors.white),
-                                hint: Text('Please choose a option'),
-                                value: role,
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    role = newValue.toString();
-                                  });
-                                },
-                                items: [
-                                  'Select',
-                                  'Author',
-                                  'Editor',
-                                  'Voice-artist',
-                                  'Translator',
-                                  'Quality'
-                                ].map((location) {
-                                  return DropdownMenuItem(
-                                    child: new Text(location),
-                                    value: location,
-                                  );
-                                }).toList(),
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: TextReuse(
+                        hint: 'Phone',
+                        icon: Icons.phone,
+                        controller: phoneNoController,
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      child: CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        checkColor: Colors.white,
+                        title: Text(
+                          'WhatsApp number same as phone number',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        value: valuesecond,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            valuesecond = value!;
+                          });
+                          if (valuesecond) {
+                            WhatphoneNoController.text = phoneNoController.text;
+                          }
+                        },
+                      ),
+                    ),
+                    Visibility(
+                      visible: !valuesecond,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.2,
                         child: TextReuse(
-                          hint: 'Phone',
-                          icon: Icons.phone,
-                          controller: phoneNoController,
+                          hint: 'WhatsApp',
+                          icon: Icons.phone_android_sharp,
+                          controller: WhatphoneNoController,
                         ),
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: CheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          checkColor: Colors.white,
-                          title: Text(
-                            'WhatsApp number same as phone number',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          value: valuesecond,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              valuesecond = value!;
-                            });
-                            if (valuesecond) {
-                              WhatphoneNoController.text =
-                                  phoneNoController.text;
-                            }
-                          },
-                        ),
-                      ),
-                      Visibility(
-                        visible: !valuesecond,
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width / 2,
-                          child: TextReuse(
-                            hint: 'WhatsApp',
-                            icon: Icons.phone_android_sharp,
-                            controller: WhatphoneNoController,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 3,
-                        child: TextButton(
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.all(0)),
-                            elevation: MaterialStateProperty.all(0),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(1))),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.black),
-                            shadowColor: MaterialStateProperty.all(
-                                Theme.of(context).colorScheme.onSurface),
-                          ),
-                          onPressed: () async {
-                            if (passw.text.isNotEmpty &&
-                                username.text.isNotEmpty &&
-                                emailcontroller.text.isNotEmpty &&
-                                phoneNoController.text.isNotEmpty &&
-                                role != 'Select') {
-                              http.Response res = await postRequest();
-                              var dat = json.decode(res.body);
-                              if (res.statusCode < 300) {
-                                Get.defaultDialog(
-                                    title: '${dat['status']}',
-                                    middleText: '${dat['msg']}',
-                                    titleStyle:
-                                        const TextStyle(color: Colors.green));
-                              } else {
-                                Get.defaultDialog(
-                                    title: '${dat['message']}',
-                                    middleText: ' ',
-                                    titleStyle:
-                                        const TextStyle(color: Colors.red));
-                              }
-                            } else {
-                              Get.snackbar(
-                                'Fill details',
-                                'Try again',
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
-                            }
-                          },
-                          child: const Text(
-                            'Create account',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
-              Expanded(
-                  flex: 1,
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 5,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
                       child: TextButton(
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -333,17 +280,74 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           shadowColor: MaterialStateProperty.all(
                               Theme.of(context).colorScheme.onSurface),
                         ),
-                        onPressed: () {
-                          Get.toNamed(Routes.login);
+                        onPressed: () async {
+                          if (passw.text.isNotEmpty &&
+                              username.text.isNotEmpty &&
+                              emailcontroller.text.isNotEmpty &&
+                              phoneNoController.text.isNotEmpty &&
+                              role != 'Select') {
+                            http.Response res = await postRequest();
+                            var dat = json.decode(res.body);
+                            if (res.statusCode < 300) {
+                              Get.defaultDialog(
+                                  title: '${dat['status']}',
+                                  middleText: '${dat['msg']}',
+                                  titleStyle:
+                                      const TextStyle(color: Colors.green));
+                            } else {
+                              Get.defaultDialog(
+                                  title: '${dat['message']}',
+                                  middleText: ' ',
+                                  titleStyle:
+                                      const TextStyle(color: Colors.red));
+                            }
+                          } else {
+                            Get.snackbar(
+                              'Fill details',
+                              'Try again',
+                              snackPosition: SnackPosition.BOTTOM,
+                            );
+                          }
                         },
                         child: const Text(
-                          'Sign in',
+                          'Create account',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
-                  )),
-            ],
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width / 5,
+                    child: TextButton(
+                      style: ButtonStyle(
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(0)),
+                        elevation: MaterialStateProperty.all(0),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(1))),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.black),
+                        shadowColor: MaterialStateProperty.all(
+                            Theme.of(context).colorScheme.onSurface),
+                      ),
+                      onPressed: () {
+                        Get.toNamed(Routes.login);
+                      },
+                      child: const Text(
+                        'Sign in',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

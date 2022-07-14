@@ -6,5 +6,7 @@ abstract class Routes {
   static const homePageView = '/dashboard';
   static const resetpassword = '/resetpassword';
   static const signUpScreen = '/signUpScreen';
+  static const autherPage = '/author';
+  static const voicePage = '/voice';
 
 }

@@ -6,6 +6,9 @@ import 'package:omorals/Presentation/login/loginScreenView.dart';
 import 'package:omorals/Presentation/signup/signupView.dart';
 import 'package:omorals/Presentation/splashScreen/splashScreen.dart';
 
+import '../Presentation/autherPage/autherPage.dart';
+import '../Presentation/voice_page/voice_view.dart';
+
 part 'app_route.dart';
 
 class AppPages {
@@ -28,6 +31,14 @@ class AppPages {
     GetPage(
         name: Routes.signUpScreen,
         page: () => SignUpScreen(),
+        binding: MainBinding()),
+    GetPage(
+        name: Routes.voicePage,
+        page: () => VoiceView(),
+        binding: MainBinding()),
+    GetPage(
+        name: Routes.autherPage,
+        page: () => AutherPage(),
         binding: MainBinding()),
   ];
 }

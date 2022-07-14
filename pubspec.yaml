@@ -37,11 +37,13 @@ dependencies:
   get: ^4.3.8
   get_storage: ^2.0.3
   dio: ^4.0.0
+  http:
   connectivity: ^3.0.6
-  url_launcher:
-  cached_network_image: ^3.2.0
-  carousel_slider: ^4.0.0
   youtube_player_iframe:
+#  text_to_speech: ^0.2.3
+#  speech_to_text: ^5.6.0
+#  audioplayers:
+  file_picker: ^4.6.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/audios/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
