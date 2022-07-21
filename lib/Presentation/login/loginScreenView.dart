@@ -190,8 +190,11 @@ class _loginScreenState extends State<loginScreen> {
                                     left: 20, top: 13, bottom: 13),
                                 child: TextFormField(
                                     controller: emailcontroller,
-                                    keyboardType: TextInputType.number,
+                                    keyboardType: TextInputType.emailAddress,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    textAlign: TextAlign.left,
                                     decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(10.0),
                                       border: InputBorder.none,
                                       fillColor: c_White,
                                       hintStyle: TextStyle(
@@ -236,8 +239,11 @@ class _loginScreenState extends State<loginScreen> {
                                 child: TextFormField(
                                     controller: pwcontroller,
                                     obscureText: _showPassword1,
-                                    keyboardType: TextInputType.emailAddress,
+                                    keyboardType: TextInputType.visiblePassword,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    textAlign: TextAlign.left,
                                     decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.all(10.0),
                                       suffixIcon: InkWell(
                                         onTap: () {
                                           setState(() {
@@ -757,7 +763,8 @@ class _loginScreenState extends State<loginScreen> {
                                     pwcontroller.text.isNotEmpty) {
                                   // Get.toNamed(Routes.homescreen);
                                   loginController.callAPI(
-                                      emailcontroller.text, pwcontroller.text, Bcontext: context);
+                                      emailcontroller.text, pwcontroller.text,
+                                      Bcontext: context);
                                 } else {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(

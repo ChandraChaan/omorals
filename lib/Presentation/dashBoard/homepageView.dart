@@ -5,6 +5,7 @@ import 'package:omorals/Config/app_pages.dart';
 import 'package:omorals/Presentation/dashBoard/slideShowView.dart';
 import 'package:omorals/utils/constant.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -50,6 +51,54 @@ class _HomePageViewState extends State<HomePageView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+        drawer: GetStorage().read('userName') == null
+            ? null
+            : Drawer(
+                child: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: ListView(
+                      children: <Widget>[
+                        if (GetStorage().read('role') == 'Author')
+                          ListTile(
+                            onTap: () {
+                              Get.toNamed(Routes.autherPage);
+                            },
+                            title: Text('Create Story'),
+                          )
+                        else if (GetStorage().read('role') == 'Editor')
+                          ListTile(
+                            onTap: () {
+                              Get.toNamed(Routes.voicePage);
+                            },
+                            title: Text('Upload a video'),
+                          )
+                        else
+                          ListTile(
+                            onTap: () {
+                              Get.toNamed(Routes.voicePage);
+                            },
+                            title: Text('Upload Voice'),
+                          ),
+                        ListTile(
+                          onTap: () {
+                            // Get.back();
+                            GetStorage().erase();
+                            Navigator.pop(context);
+                            Get.toNamed(Routes.homePageView);
+                          },
+                          title: Text('Logout'),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
         body: Column(
           children: [
             Expanded(
@@ -133,7 +182,7 @@ class _HomePageViewState extends State<HomePageView> {
                           ],
                         ),
                       )
-                    : Text('WellCome'),
+                    : Text('WellCome ${GetStorage().read('userName')}'),
               ),
             ),
             Expanded(
@@ -171,31 +220,29 @@ class _HomePageViewState extends State<HomePageView> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 300,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff9ef9fe),
-                                    border: Border.all(
-                                      color: Color(0xff9ef9fe),
-                                    ),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20))),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(18.0),
-                                  child: YoutubePlayerIFrame(
-                                    controller: YoutubePlayerController(
-                                      initialVideoId:
-                                          '${videosList[index]['id']['videoId']}',
-                                      params: const YoutubePlayerParams(
-                                        autoPlay: false,
-                                        strictRelatedVideos: true,
-                                        showControls: true,
-                                        showFullscreenButton: true,
+                              InkWell(
+                                onTap: () async {
+                                  launchUrl(
+                                      Uri.parse(
+                                          "https://www.youtube.com/watch?v=${videosList[index]['id']['videoId']}"),
+                                      mode: LaunchMode.externalApplication);
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 360,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(videosList[index]
+                                                ['snippet']['thumbnails']
+                                            ['high']['url']),
+                                        fit: BoxFit.fitWidth,
                                       ),
-                                    ),
-                                    aspectRatio: 16 / 9,
-                                  ),
+                                      color: const Color(0xff9ef9fe),
+                                      border: Border.all(
+                                        color: const Color(0xff9ef9fe),
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(20))),
                                 ),
                               )
                             ],
@@ -206,6 +253,21 @@ class _HomePageViewState extends State<HomePageView> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget youtubePlay(BuildContext context, int index) {
+    return YoutubePlayerIFrame(
+      controller: YoutubePlayerController(
+        initialVideoId: '${videosList[index]['id']['videoId']}',
+        params: const YoutubePlayerParams(
+          autoPlay: false,
+          strictRelatedVideos: true,
+          showControls: true,
+          showFullscreenButton: true,
+        ),
+      ),
+      aspectRatio: 16 / 9,
     );
   }
 
