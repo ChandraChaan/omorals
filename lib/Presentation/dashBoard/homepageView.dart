@@ -10,6 +10,7 @@ import 'dart:convert';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../autherPage/autherPage.dart';
+import '../voice_page/newAufile.dart';
 
 class HomePageView extends StatefulWidget {
   @override
@@ -87,6 +88,13 @@ class _HomePageViewState extends State<HomePageView> {
                           ),
                         ListTile(
                           onTap: () {
+                            Get.toNamed(Routes.voicePage);
+                            // Get.to(AudHome());
+                          },
+                          title: Text('Upload Voice'),
+                        ),
+                        ListTile(
+                          onTap: () {
                             // Get.back();
                             GetStorage().erase();
                             Navigator.pop(context);
@@ -154,6 +162,7 @@ class _HomePageViewState extends State<HomePageView> {
                                 ),
                                 onPressed: () {
                                   Get.toNamed(Routes.voicePage);
+                                  // Get.to(AudHome());
                                 },
                                 child: Text(
                                   'Voice',
