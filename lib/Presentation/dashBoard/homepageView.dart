@@ -10,6 +10,7 @@ import 'dart:convert';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../autherPage/autherPage.dart';
+import '../editorPage/editorPage.dart';
 import '../voice_page/newAufile.dart';
 
 class HomePageView extends StatefulWidget {
@@ -182,10 +183,11 @@ class _HomePageViewState extends State<HomePageView> {
                                       Theme.of(context).colorScheme.onSurface),
                                 ),
                                 onPressed: () {
-                                  Get.toNamed(Routes.login);
+                                  // Get.toNamed(Routes.login);
+                                  Get.to(EditorPage());
                                 },
                                 child: Text(
-                                  'Sign in',
+                                  'Editor',
                                   style: TextStyle(color: Color(0xff271a83)),
                                 )),
                           ],
