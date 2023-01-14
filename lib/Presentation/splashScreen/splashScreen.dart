@@ -23,9 +23,10 @@ class _splashScreenState extends State<splashScreen> {
     return Scaffold(
       body: Container(
           height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           child: Image.asset(
             'assets/images/splashScreen_flutter.jpg',
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           )),
     );
   }
