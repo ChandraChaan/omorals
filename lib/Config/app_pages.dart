@@ -12,7 +12,7 @@ import '../Presentation/voice_page/voice_view.dart';
 part 'app_route.dart';
 
 class AppPages {
-  static const INITIAL = Routes.splash;
+  static const INITIAL = Routes.homePageView;
   static final routes = [
     GetPage(
         name: Routes.splash,
