@@ -55,25 +55,25 @@ class _VoiceViewState extends State<VoiceView> {
         setState(() {});
       });
 
-      player.onAudioPositionChanged.listen((Duration p) {
-        currentpos =
-            p.inMilliseconds; //get the current position of playing audio
-
-        //generating the duration label
-        int shours = Duration(milliseconds: currentpos).inHours;
-        int sminutes = Duration(milliseconds: currentpos).inMinutes;
-        int sseconds = Duration(milliseconds: currentpos).inSeconds;
-
-        int rhours = shours;
-        int rminutes = sminutes - (shours * 60);
-        int rseconds = sseconds - (sminutes * 60 + shours * 60 * 60);
-
-        currentpostlabel = "$rhours:$rminutes:$rseconds";
-
-        setState(() {
-          //refresh the UI
-        });
-      });
+      // player.onAudioPositionChanged.listen((Duration p) {
+      //   currentpos =
+      //       p.inMilliseconds; //get the current position of playing audio
+      //
+      //   //generating the duration label
+      //   int shours = Duration(milliseconds: currentpos).inHours;
+      //   int sminutes = Duration(milliseconds: currentpos).inMinutes;
+      //   int sseconds = Duration(milliseconds: currentpos).inSeconds;
+      //
+      //   int rhours = shours;
+      //   int rminutes = sminutes - (shours * 60);
+      //   int rseconds = sseconds - (sminutes * 60 + shours * 60 * 60);
+      //
+      //   currentpostlabel = "$rhours:$rminutes:$rseconds";
+      //
+      //   setState(() {
+      //     //refresh the UI
+      //   });
+      // });
     });
     super.initState();
     // _initSpeech();
@@ -125,11 +125,11 @@ class _VoiceViewState extends State<VoiceView> {
 
   playAudio() async {
     if (isPlaying == true) {
-      int result = await player.stop();
-      if (result == 1) {
-        isPlaying = false;
-        setState(() {});
-      }
+      // int result = await player.stop();
+      // if (result == 1) {
+      //   isPlaying = false;
+      //   setState(() {});
+      // }
       tx = 'Play Audio';
     } else {
       // final file = new File(selectedfileResult?.files.single.path ?? "");
@@ -138,12 +138,12 @@ class _VoiceViewState extends State<VoiceView> {
       print('trying to play audio');
       // final result = await player.play(audioPath, isLocal: true);
 
-      int result = await player.playBytes(audiobytes);
-      if (result == 1) {
-        isPlaying = true;
-
-        setState(() {});
-      }
+      // int result = await player.playBytes(audiobytes);
+      // if (result == 1) {
+      //   isPlaying = true;
+      //
+      //   setState(() {});
+      // }
       print('done to play audio');
 
       tx = 'Stop Audio';
@@ -153,17 +153,17 @@ class _VoiceViewState extends State<VoiceView> {
 
   pausAud() async {
     if (isResume == false) {
-      int result = await player.pause();
-      if (result == 1) {
-        isResume = true;
-        setState(() {});
-      }
+      // int result = await player.pause();
+      // if (result == 1) {
+      //   isResume = true;
+      //   setState(() {});
+      // }
     } else {
-      int result = await player.resume();
-      if (result == 1) {
-        isResume = false;
-        setState(() {});
-      }
+      // int result = await player.resume();
+      // if (result == 1) {
+      //   isResume = false;
+      //   setState(() {});
+      // }
     }
   }
 
@@ -209,14 +209,14 @@ class _VoiceViewState extends State<VoiceView> {
                 label: currentpostlabel,
                 onChanged: (double value) async {
                   int seekval = value.round();
-                  int result =
-                      await player.seek(Duration(milliseconds: seekval));
-                  if (result == 1) {
-                    //seek successful
-                    currentpos = seekval;
-                  } else {
-                    print("Seek unsuccessful.");
-                  }
+                  // int result =
+                  //     await player.seek(Duration(milliseconds: seekval));
+                  // if (result == 1) {
+                  //   //seek successful
+                  //   currentpos = seekval;
+                  // } else {
+                  //   print("Seek unsuccessful.");
+                  // }
                 },
               )),
             if (selectedfileResult == null)

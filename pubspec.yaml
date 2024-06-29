@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.1 <3.0.0"
+  sdk: ">=3.3.1 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,20 +36,20 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.3.8
   get_storage: ^2.0.3
-  dio: ^4.0.0
-  http:
+  dio: ^5.4.3+1
+  http: ^1.2.1
   connectivity: ^3.0.6
-  youtube_player_iframe:
+  youtube_player_iframe: ^5.1.2
   url_launcher: ^6.1.5
-  path_provider: ^2.0.11
+  path_provider: ^2.1.3
 #  // depreted
   text_to_speech: ^0.2.3
   #  speech_to_text: ^5.6.0
-  audioplayers: ^0.20.1
-  file_picker: ^4.6.1
-  chewie: ^1.3.4
+  audioplayers: ^6.0.0
+  file_picker: ^8.0.3
+  chewie: ^1.8.1
   flutter_native_splash:
-  device_info_plus:
+  device_info_plus: ^10.1.0
   location:
 
 dev_dependencies:
@@ -61,7 +61,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

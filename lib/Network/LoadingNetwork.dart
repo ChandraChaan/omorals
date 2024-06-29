@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'ErrorHandlingResppnse.dart';
 import 'Logger.dart';
 import 'NetworkDataClass.dart';
@@ -26,8 +26,8 @@ class LoadingNetwork {
     try {
       print('network layer');
 
-      _dio.options.connectTimeout = 5000000;
-      _dio.options.receiveTimeout = 5000000;
+      _dio.options.connectTimeout = const Duration(milliseconds: 5000000);
+      _dio.options.receiveTimeout = const Duration(milliseconds: 5000000);
 
       if (await checkInternetConnectivity()) {
         _dio.options.baseUrl = networkDataClass.baseUrl;

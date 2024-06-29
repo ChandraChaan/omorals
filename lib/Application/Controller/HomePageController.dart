@@ -64,4 +64,9 @@ class GetHomePageController extends SuperController<GetHomePageModel> {
   void onResumed() {
     // TODO: implement onResumed
   }
+
+  @override
+  void onHidden() {
+    // TODO: implement onHidden
+  }
 }

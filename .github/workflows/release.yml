@@ -1,0 +1,40 @@
+name: Flutter Web Release
+
+on:
+  push:
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.3'
+      #
+      #      - name: Run Flutter Tests
+      #        run: flutter test
+
+      - name: Build Web
+        run: flutter build web --release --no-tree-shake-icons
+
+      - name: FTP Upload Web Build
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: build/web/
+
+      - name: Upload Web Build to Release
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/flutter_web_build.zip
+          asset_name: flutter_web_build.zip
+          asset_content_type: application/zip

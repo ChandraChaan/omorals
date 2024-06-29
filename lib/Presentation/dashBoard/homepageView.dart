@@ -268,11 +268,11 @@ class _HomePageViewState extends State<HomePageView> {
   }
 
   Widget youtubePlay(BuildContext context, int index) {
-    return YoutubePlayerIFrame(
-      controller: YoutubePlayerController(
-        initialVideoId: '${videosList[index]['id']['videoId']}',
+    return YoutubePlayer(
+      controller: YoutubePlayerController.fromVideoId(
+        videoId: '${videosList[index]['id']['videoId']}',
+        autoPlay: false,
         params: const YoutubePlayerParams(
-          autoPlay: false,
           strictRelatedVideos: true,
           showControls: true,
           showFullscreenButton: true,

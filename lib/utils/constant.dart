@@ -39,4 +39,4 @@ TextStyle UInormalStyle =
 TextStyle UIHeadingStyle =
     TextStyle(color: CentralizeColor.colorWhite, fontSize: 24, fontWeight: FontWeight.bold);
 
-Widget kHorizontalSpace({width: 10.0}) => SizedBox(width: width);
+Widget kHorizontalSpace({width = 10.0}) => SizedBox(width: width);
