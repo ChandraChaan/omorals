@@ -4,7 +4,8 @@ import 'package:omorals/Application/Controller/loginController.dart';
 import 'package:omorals/Config/app_pages.dart';
 import 'package:omorals/Utils/colors.dart';
 import 'package:omorals/Utils/constant.dart';
-import 'package:omorals/Utils/imagesConstants.dart';
+
+import '../../Utils/imagesConstants.dart';
 
 class loginScreen extends StatefulWidget {
   @override
@@ -53,9 +54,9 @@ class _loginScreenState extends State<loginScreen> {
                             Container(
                               width: getWidth(context),
                               height: getHeight(context),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(localimages.blue_rose),
+                                  image: AssetImage(LocalImages.blueRose),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -67,10 +68,10 @@ class _loginScreenState extends State<loginScreen> {
                               child: Container(
                                 width: width1 / 5,
                                 height: 30,
-                                margin: EdgeInsets.only(top: 18, left: 15),
+                                margin: const EdgeInsets.only(top: 18, left: 15),
                                 alignment: Alignment.centerLeft,
                                 child: Image.asset(
-                                  localimages.flutterWallpaper,
+                                  LocalImages.flutterWallpaper,
                                   scale: 5,
                                 ),
                               ),
@@ -80,13 +81,13 @@ class _loginScreenState extends State<loginScreen> {
                       ),
                       Container(
                         width: getWidth(context),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 16, top: 21, right: 16, bottom: 37),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "Log in",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
@@ -107,7 +108,7 @@ class _loginScreenState extends State<loginScreen> {
                             //         Container(
                             //             width: 20,
                             //             height: 45,
-                            //             child: Image.asset(localimages
+                            //             child: Image.asset(LocalImages
                             //                 .img_google_logos) //SvgPicture.asset(img_google_logo),
                             //             ),
                             //         SizedBox(
@@ -156,11 +157,11 @@ class _loginScreenState extends State<loginScreen> {
                             //     )
                             //   ],
                             // ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Email address',
                                     style: TextStyle(
@@ -174,7 +175,7 @@ class _loginScreenState extends State<loginScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Container(
@@ -193,7 +194,7 @@ class _loginScreenState extends State<loginScreen> {
                                     keyboardType: TextInputType.emailAddress,
                                     textAlignVertical: TextAlignVertical.center,
                                     textAlign: TextAlign.left,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       contentPadding: EdgeInsets.all(10.0),
                                       border: InputBorder.none,
                                       fillColor: c_White,
@@ -204,11 +205,11 @@ class _loginScreenState extends State<loginScreen> {
                                     )),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Password',
                                     style: TextStyle(
@@ -222,7 +223,7 @@ class _loginScreenState extends State<loginScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Container(
@@ -243,7 +244,7 @@ class _loginScreenState extends State<loginScreen> {
                                     textAlignVertical: TextAlignVertical.center,
                                     textAlign: TextAlign.left,
                                     decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.all(10.0),
+                                      contentPadding: const EdgeInsets.all(10.0),
                                       suffixIcon: InkWell(
                                         onTap: () {
                                           setState(() {
@@ -258,7 +259,7 @@ class _loginScreenState extends State<loginScreen> {
                                       ),
                                       border: InputBorder.none,
                                       fillColor: c_White,
-                                      hintStyle: TextStyle(
+                                      hintStyle: const TextStyle(
                                           fontSize: textSizeSmallMedium,
                                           color: hint_text_color),
                                       hintText: "password",
@@ -271,21 +272,21 @@ class _loginScreenState extends State<loginScreen> {
                                     )),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             InkWell(
                               onTap: () {
                                 if (emailcontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: c_red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill EMail'),
                                   ));
                                 } else if (pwcontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: c_red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill password'),
@@ -298,7 +299,7 @@ class _loginScreenState extends State<loginScreen> {
                                       Bcontext: context);
                                 } else {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: c_red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text(
@@ -311,7 +312,7 @@ class _loginScreenState extends State<loginScreen> {
                                 width: getWidth(context),
                                 height: 45,
                                 color: container_borderBlueColor,
-                                child: Center(
+                                child: const Center(
                                     child: Text(
                                   "Log in",
                                   style: TextStyle(
@@ -320,13 +321,13 @@ class _loginScreenState extends State<loginScreen> {
                                 )),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Don't have an account? ",
                                   style: TextStyle(
                                     fontSize: textSizeSMedium,
@@ -338,7 +339,7 @@ class _loginScreenState extends State<loginScreen> {
                                   },
                                   child: Container(
                                     width: 60,
-                                    child: Text(
+                                    child: const Text(
                                       " Sign Up",
                                       style: TextStyle(
                                           fontSize: textSizeSMedium,
@@ -350,14 +351,14 @@ class _loginScreenState extends State<loginScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             InkWell(
                               onTap: () {
                                 Get.toNamed(Routes.resetpassword);
                               },
-                              child: Align(
+                              child: const Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "Forgot Password?",
@@ -369,7 +370,7 @@ class _loginScreenState extends State<loginScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             // Align(
@@ -387,7 +388,7 @@ class _loginScreenState extends State<loginScreen> {
                             //     CircleAvatar(
                             //       radius: 10,
                             //       backgroundColor: c_White,
-                            //       child: Image.asset(localimages
+                            //       child: Image.asset(LocalImages
                             //           .img_google_logos), //SvgPicture.asset(img_google_logo),
                             //     ),
                             //     SizedBox(
@@ -503,9 +504,9 @@ class _loginScreenState extends State<loginScreen> {
                           Container(
                             width: getWidth(context),
                             height: getHeight(context),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage(localimages.blue_rose),
+                                image: AssetImage(LocalImages.blueRose),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -523,10 +524,10 @@ class _loginScreenState extends State<loginScreen> {
                             child: Container(
                               width: width1 / 5,
                               height: 30,
-                              margin: EdgeInsets.only(top: 57, left: 30),
+                              margin: const EdgeInsets.only(top: 57, left: 30),
                               alignment: Alignment.centerLeft,
                               child: Image.asset(
-                                localimages.flutterWallpaper,
+                                LocalImages.flutterWallpaper,
                                 scale: 5,
                               ),
                             ),
@@ -539,19 +540,19 @@ class _loginScreenState extends State<loginScreen> {
                       child: Container(
                         width: getWidth(context),
                         height: getHeight(context),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 80, top: 30, right: 155, bottom: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
                               ),
                             ),
-                            Text(
+                            const Text(
                               "Log in",
                               style: TextStyle(
                                   fontSize: textSizeXXXLarge,
@@ -577,7 +578,7 @@ class _loginScreenState extends State<loginScreen> {
                             //           width: 25,
                             //           height: 45,
                             //           child: Image.asset(
-                            //               localimages.img_google_logos),
+                            //               LocalImages.img_google_logos),
                             //
                             //           // SvgPicture.asset(
                             //           //   img_google_logo,
@@ -628,14 +629,14 @@ class _loginScreenState extends State<loginScreen> {
                             //     )
                             //   ],
                             // ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
                               ),
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Email address',
                                     style: TextStyle(
@@ -649,7 +650,7 @@ class _loginScreenState extends State<loginScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
@@ -666,7 +667,7 @@ class _loginScreenState extends State<loginScreen> {
                                 child: TextFormField(
                                     controller: emailcontroller,
                                     keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                       fillColor: c_White,
                                       hintStyle: TextStyle(
@@ -676,14 +677,14 @@ class _loginScreenState extends State<loginScreen> {
                                     )),
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
                               ),
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Password',
                                     style: TextStyle(
@@ -697,7 +698,7 @@ class _loginScreenState extends State<loginScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
@@ -730,14 +731,14 @@ class _loginScreenState extends State<loginScreen> {
                                       ),
                                       border: InputBorder.none,
                                       fillColor: c_White,
-                                      hintStyle: TextStyle(
+                                      hintStyle: const TextStyle(
                                           fontSize: textSizeSmallMedium,
                                           color: hint_text_color),
                                       hintText: "password",
                                     )),
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -747,14 +748,14 @@ class _loginScreenState extends State<loginScreen> {
                               onTap: () {
                                 if (emailcontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: c_red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill EMail'),
                                   ));
                                 } else if (pwcontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: c_red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill password'),
@@ -767,7 +768,7 @@ class _loginScreenState extends State<loginScreen> {
                                       Bcontext: context);
                                 } else {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: c_red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text(
@@ -779,7 +780,7 @@ class _loginScreenState extends State<loginScreen> {
                                 width: getWidth(context),
                                 height: 45,
                                 color: container_borderBlueColor,
-                                child: Center(
+                                child: const Center(
                                     child: Text(
                                   "Log in",
                                   style: TextStyle(
@@ -788,7 +789,7 @@ class _loginScreenState extends State<loginScreen> {
                                 )),
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -800,7 +801,7 @@ class _loginScreenState extends State<loginScreen> {
                                   flex: 1,
                                   child: Row(
                                     children: [
-                                      Expanded(
+                                      const Expanded(
                                         flex: 2,
                                         child: Align(
                                           alignment: Alignment.centerRight,
@@ -820,7 +821,7 @@ class _loginScreenState extends State<loginScreen> {
                                           },
                                           child: Container(
                                             width: 30,
-                                            child: Text(
+                                            child: const Text(
                                               "Sign Up",
                                               style: TextStyle(
                                                   fontSize: textSizeSMedium,
@@ -841,7 +842,7 @@ class _loginScreenState extends State<loginScreen> {
                                     onTap: () {
                                       Get.toNamed(Routes.resetpassword);
                                     },
-                                    child: Align(
+                                    child: const Align(
                                       alignment: Alignment.centerRight,
                                       child: Text(
                                         "Forgot Password?",
@@ -857,7 +858,7 @@ class _loginScreenState extends State<loginScreen> {
                                 ),
                               ],
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -878,7 +879,7 @@ class _loginScreenState extends State<loginScreen> {
                             //     CircleAvatar(
                             //       radius: 14,
                             //       backgroundColor: c_White,
-                            //       child: Image.asset(localimages
+                            //       child: Image.asset(LocalImages
                             //           .img_google_logos), //SvgPicture.asset(img_google_logo),
                             //     ),
                             //     SizedBox(

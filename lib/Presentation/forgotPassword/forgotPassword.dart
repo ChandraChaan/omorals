@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:omorals/Config/app_pages.dart';
-import 'package:omorals/Utils/colors.dart';
-import 'package:omorals/Utils/constant.dart';
-import 'package:omorals/Utils/imagesConstants.dart';
+
+import '../../Utils/colors.dart';
+import '../../Utils/constant.dart';
+import '../../Utils/imagesConstants.dart';
+
 
 class ForgotPage extends StatefulWidget {
   const ForgotPage({Key? key}) : super(key: key);
@@ -33,13 +35,13 @@ class _ForgotPageState extends State<ForgotPage> {
       body: width1 < 800
           ? SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Container(
+              child: SizedBox(
                 width: getWidth(context),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
+                    SizedBox(
                       width: getWidth(context),
                       height: 147,
                       child: Stack(
@@ -47,9 +49,9 @@ class _ForgotPageState extends State<ForgotPage> {
                           Container(
                             width: getWidth(context),
                             height: getHeight(context),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage(localimages.pink_flower),
+                                image: AssetImage(LocalImages.pinkFlower),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -61,10 +63,10 @@ class _ForgotPageState extends State<ForgotPage> {
                             child: Container(
                               width: width1 / 5,
                               height: 30,
-                              margin: EdgeInsets.only(top: 18, left: 15),
+                              margin: const EdgeInsets.only(top: 18, left: 15),
                               alignment: Alignment.centerLeft,
                               child: Image.asset(
-                                localimages.flutterWallpaper,
+                                LocalImages.flutterWallpaper,
                                 scale: 5,
                               ),
                             ),
@@ -74,7 +76,7 @@ class _ForgotPageState extends State<ForgotPage> {
                     ),
                     Container(
                       width: getWidth(context),
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           left: 16, top: 21, right: 16, bottom: 37),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -83,16 +85,16 @@ class _ForgotPageState extends State<ForgotPage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Create new password',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               RichText(
-                                text: TextSpan(children: [
+                                text: const TextSpan(children: [
                                   TextSpan(
                                       text: 'Email',
                                       style: TextStyle(
@@ -107,7 +109,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                           color: Colors.red))
                                 ]),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Container(
@@ -124,7 +126,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                   child: TextFormField(
                                       controller: emailcontroller,
                                       keyboardType: TextInputType.emailAddress,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: InputBorder.none,
                                         fillColor: Colors.white,
                                         hintStyle: TextStyle(
@@ -135,12 +137,12 @@ class _ForgotPageState extends State<ForgotPage> {
                                       )),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
                               email == true
                                   ? RichText(
-                                      text: TextSpan(children: [
+                                      text: const TextSpan(children: [
                                         TextSpan(
                                             text: 'Enter OTP',
                                             style: TextStyle(
@@ -178,7 +180,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                           // Get.toNamed(Routes.resetpassword);
                                         } else {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                              .showSnackBar(const SnackBar(
                                             backgroundColor: Colors.red,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text('Please enter Email'),
@@ -190,10 +192,10 @@ class _ForgotPageState extends State<ForgotPage> {
                                           elevation: 12.0,
                                           textStyle: const TextStyle(
                                               color: text_blueColor)),
-                                      child: Text("Send OTP",
+                                      child: const Text("Send OTP",
                                           style: TextStyle(color: c_White))),
                               email == true
-                                  ? SizedBox(
+                                  ? const SizedBox(
                                       height: 10,
                                     )
                                   : Container(),
@@ -214,7 +216,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                             controller: otpcontro,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: InputBorder.none,
                                               fillColor: Colors.white,
                                               hintStyle: TextStyle(
@@ -226,11 +228,11 @@ class _ForgotPageState extends State<ForgotPage> {
                                       ),
                                     )
                                   : Container(),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
                               RichText(
-                                text: TextSpan(children: [
+                                text: const TextSpan(children: [
                                   TextSpan(
                                       text: 'New Password',
                                       style: TextStyle(
@@ -245,7 +247,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                           color: Colors.red))
                                 ]),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Container(
@@ -278,22 +280,22 @@ class _ForgotPageState extends State<ForgotPage> {
                                         ),
                                         border: InputBorder.none,
                                         fillColor: c_White,
-                                        hintStyle: TextStyle(
+                                        hintStyle: const TextStyle(
                                             fontSize: textSizeSmallMedium,
                                             color: hint_text_color),
                                         hintText: "password",
                                       )),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
-                              Text('Must be atleast 8 characters'),
-                              SizedBox(
+                              const Text('Must be atleast 8 characters'),
+                              const SizedBox(
                                 height: 30,
                               ),
                               RichText(
-                                text: TextSpan(children: [
+                                text: const TextSpan(children: [
                                   TextSpan(
                                       text: 'Confirm Password',
                                       style: TextStyle(
@@ -308,7 +310,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                           color: Colors.red))
                                 ]),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Container(
@@ -341,14 +343,14 @@ class _ForgotPageState extends State<ForgotPage> {
                                         ),
                                         border: InputBorder.none,
                                         fillColor: c_White,
-                                        hintStyle: TextStyle(
+                                        hintStyle: const TextStyle(
                                             fontSize: textSizeSmallMedium,
                                             color: hint_text_color),
                                         hintText: "password",
                                       )),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 40,
                               ),
                               Row(
@@ -363,11 +365,11 @@ class _ForgotPageState extends State<ForgotPage> {
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         'Cancel',
                                         style: TextStyle(color: Colors.blue),
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   ElevatedButton(
@@ -379,14 +381,14 @@ class _ForgotPageState extends State<ForgotPage> {
                                       onPressed: () {
                                         if (emailcontroller.text.isEmpty) {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                              .showSnackBar(const SnackBar(
                                             backgroundColor: Colors.red,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text('Please fill EMail'),
                                           ));
                                         } else if (otpcontro.text.isEmpty) {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                              .showSnackBar(const SnackBar(
                                             backgroundColor: Colors.red,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text('Please fill OTP'),
@@ -394,7 +396,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                         } else if (newpwcontroller
                                             .text.isEmpty) {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                              .showSnackBar(const SnackBar(
                                             backgroundColor: Colors.red,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text(
@@ -403,7 +405,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                         } else if (confimPwcontroller
                                             .text.isEmpty) {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                              .showSnackBar(const SnackBar(
                                             backgroundColor: Colors.red,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text(
@@ -426,23 +428,23 @@ class _ForgotPageState extends State<ForgotPage> {
                                           //Get.toNamed(Routes.loginScreen);
                                         } else {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
+                                              .showSnackBar(const SnackBar(
                                             backgroundColor: Colors.red,
                                             behavior: SnackBarBehavior.floating,
                                             content: Text('Please fill EMail'),
                                           ));
                                         }
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         'Save',
                                         style: TextStyle(color: Colors.white),
                                       )),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 110,
                               ),
-                              Container(
+                              SizedBox(
                                 width: getWidth(context),
                                 height: 20,
                                 child: Row(
@@ -456,7 +458,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                             // Get.toNamed(
                                             //     Routes.termsAndCondition);
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             "Terms",
                                             style: TextStyle(
                                                 fontSize: textSizeSmallMedium,
@@ -465,7 +467,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
+                                    const Expanded(
                                       flex: 1,
                                       child: Center(
                                         child: Text(
@@ -483,7 +485,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                           print('privacyPolicy');
                                           // Get.toNamed(Routes.privacyPolicy);
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Privacy policy",
                                           style: TextStyle(
                                               fontSize: textSizeSmallMedium,
@@ -491,7 +493,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
+                                    const Expanded(
                                       flex: 1,
                                       child: Center(
                                         child: Text(
@@ -508,7 +510,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                       child: Center(
                                         child: InkWell(
                                           onTap: () {},
-                                          child: Text(
+                                          child: const Text(
                                             "Support",
                                             style: TextStyle(
                                                 fontSize: textSizeSmallMedium,
@@ -529,7 +531,7 @@ class _ForgotPageState extends State<ForgotPage> {
                 ),
               ),
             )
-          : Container(
+          : SizedBox(
               width: getWidth(context),
               height: getHeight(context),
               child: SingleChildScrollView(
@@ -543,10 +545,10 @@ class _ForgotPageState extends State<ForgotPage> {
                               flex: 1,
                               child: Stack(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: getHeight(context),
                                     child: Image.asset(
-                                      localimages.white_flower,
+                                      LocalImages.white_flower,
                                       fit: BoxFit.fill,
                                     ),
                                   ),
@@ -558,10 +560,10 @@ class _ForgotPageState extends State<ForgotPage> {
                                       width: width1 / 5,
                                       height: 30,
                                       margin:
-                                          EdgeInsets.only(top: 57, left: 30),
+                                          const EdgeInsets.only(top: 57, left: 30),
                                       alignment: Alignment.centerLeft,
                                       child: Image.asset(
-                                        localimages.flutterWallpaper,
+                                        LocalImages.flutterWallpaper,
                                         scale: 5,
                                       ),
                                     ),
@@ -572,21 +574,21 @@ class _ForgotPageState extends State<ForgotPage> {
                               flex: 1,
                               child: Container(
                                 color: c_White,
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     left: 80, top: 30, right: 155, bottom: 30),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Create new password',
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                     RichText(
-                                      text: TextSpan(children: [
+                                      text: const TextSpan(children: [
                                         TextSpan(
                                             text: 'Email',
                                             style: TextStyle(
@@ -601,7 +603,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                 color: Colors.red))
                                       ]),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Container(
@@ -620,7 +622,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                             controller: emailcontroller,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               border: InputBorder.none,
                                               fillColor: Colors.white,
                                               hintStyle: TextStyle(
@@ -631,12 +633,12 @@ class _ForgotPageState extends State<ForgotPage> {
                                             )),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30,
                                     ),
                                     email == true
                                         ? RichText(
-                                            text: TextSpan(children: [
+                                            text: const TextSpan(children: [
                                               TextSpan(
                                                   text: 'Enter OTP',
                                                   style: TextStyle(
@@ -676,7 +678,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                 // Get.toNamed(Routes.resetpassword);
                                               } else {
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
+                                                    .showSnackBar(const SnackBar(
                                                   backgroundColor: Colors.red,
                                                   behavior:
                                                       SnackBarBehavior.floating,
@@ -690,9 +692,9 @@ class _ForgotPageState extends State<ForgotPage> {
                                                 elevation: 12.0,
                                                 textStyle: const TextStyle(
                                                     color: text_blueColor)),
-                                            child: Text("Send OTP")),
+                                            child: const Text("Send OTP")),
                                     email == true
-                                        ? SizedBox(
+                                        ? const SizedBox(
                                             height: 10,
                                           )
                                         : Container(),
@@ -716,7 +718,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                   controller: otpcontro,
                                                   keyboardType: TextInputType
                                                       .emailAddress,
-                                                  decoration: InputDecoration(
+                                                  decoration: const InputDecoration(
                                                     border: InputBorder.none,
                                                     fillColor: Colors.white,
                                                     hintStyle: TextStyle(
@@ -729,11 +731,11 @@ class _ForgotPageState extends State<ForgotPage> {
                                             ),
                                           )
                                         : Container(),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30,
                                     ),
                                     RichText(
-                                      text: TextSpan(children: [
+                                      text: const TextSpan(children: [
                                         TextSpan(
                                             text: 'New Password',
                                             style: TextStyle(
@@ -748,7 +750,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                 color: Colors.red))
                                       ]),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Container(
@@ -784,22 +786,22 @@ class _ForgotPageState extends State<ForgotPage> {
                                               ),
                                               border: InputBorder.none,
                                               fillColor: c_White,
-                                              hintStyle: TextStyle(
+                                              hintStyle: const TextStyle(
                                                   fontSize: textSizeSmallMedium,
                                                   color: hint_text_color),
                                               hintText: "password",
                                             )),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
-                                    Text('Must be atleast 8 characters'),
-                                    SizedBox(
+                                    const Text('Must be atleast 8 characters'),
+                                    const SizedBox(
                                       height: 30,
                                     ),
                                     RichText(
-                                      text: TextSpan(children: [
+                                      text: const TextSpan(children: [
                                         TextSpan(
                                             text: 'Confirm Password',
                                             style: TextStyle(
@@ -814,7 +816,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                 color: Colors.red))
                                       ]),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Container(
@@ -850,14 +852,14 @@ class _ForgotPageState extends State<ForgotPage> {
                                               ),
                                               border: InputBorder.none,
                                               fillColor: c_White,
-                                              hintStyle: TextStyle(
+                                              hintStyle: const TextStyle(
                                                   fontSize: textSizeSmallMedium,
                                                   color: hint_text_color),
                                               hintText: "password",
                                             )),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 40,
                                     ),
                                     Row(
@@ -872,12 +874,12 @@ class _ForgotPageState extends State<ForgotPage> {
                                             onPressed: () {
                                               Navigator.pop(context);
                                             },
-                                            child: Text(
+                                            child: const Text(
                                               'Cancel',
                                               style:
                                                   TextStyle(color: Colors.blue),
                                             )),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         ElevatedButton(
@@ -890,7 +892,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                               if (emailcontroller
                                                   .text.isEmpty) {
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
+                                                    .showSnackBar(const SnackBar(
                                                   backgroundColor: Colors.red,
                                                   behavior:
                                                       SnackBarBehavior.floating,
@@ -900,7 +902,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                               } else if (otpcontro
                                                   .text.isEmpty) {
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
+                                                    .showSnackBar(const SnackBar(
                                                   backgroundColor: Colors.red,
                                                   behavior:
                                                       SnackBarBehavior.floating,
@@ -910,7 +912,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                               } else if (newpwcontroller
                                                   .text.isEmpty) {
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
+                                                    .showSnackBar(const SnackBar(
                                                   backgroundColor: Colors.red,
                                                   behavior:
                                                       SnackBarBehavior.floating,
@@ -920,7 +922,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                               } else if (confimPwcontroller
                                                   .text.isEmpty) {
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
+                                                    .showSnackBar(const SnackBar(
                                                   backgroundColor: Colors.red,
                                                   behavior:
                                                       SnackBarBehavior.floating,
@@ -931,7 +933,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                       .text !=
                                                   newpwcontroller.text) {
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
+                                                    .showSnackBar(const SnackBar(
                                                   backgroundColor: Colors.red,
                                                   behavior:
                                                       SnackBarBehavior.floating,
@@ -959,7 +961,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                 //Get.toNamed(Routes.loginScreen);
                                               } else {
                                                 ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
+                                                    .showSnackBar(const SnackBar(
                                                   backgroundColor: Colors.red,
                                                   behavior:
                                                       SnackBarBehavior.floating,
@@ -968,17 +970,17 @@ class _ForgotPageState extends State<ForgotPage> {
                                                 ));
                                               }
                                             },
-                                            child: Text(
+                                            child: const Text(
                                               'Save',
                                               style: TextStyle(
                                                   color: Colors.white),
                                             )),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 110,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: getWidth(context),
                                       height: 20,
                                       child: Row(
@@ -992,7 +994,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                   // Get.toNamed(
                                                   //     Routes.termsAndCondition);
                                                 },
-                                                child: Text(
+                                                child: const Text(
                                                   "Terms",
                                                   style: TextStyle(
                                                       fontSize: textSizeSMedium,
@@ -1001,7 +1003,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          const Expanded(
                                             flex: 1,
                                             child: Center(
                                               child: Text(
@@ -1022,7 +1024,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                                   // Get.toNamed(
                                                   //     Routes.privacyPolicy);
                                                 },
-                                                child: Text(
+                                                child: const Text(
                                                   "Privacy policy",
                                                   style: TextStyle(
                                                       fontSize: textSizeSMedium,
@@ -1031,7 +1033,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          const Expanded(
                                             flex: 1,
                                             child: Center(
                                               child: Text(
@@ -1048,7 +1050,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                             child: Center(
                                               child: InkWell(
                                                 onTap: () {},
-                                                child: Text(
+                                                child: const Text(
                                                   "Support",
                                                   style: TextStyle(
                                                       fontSize: textSizeSMedium,

@@ -6,7 +6,8 @@ import 'package:omorals/Common/textField.dart';
 import 'package:omorals/Config/app_pages.dart';
 import 'package:omorals/Utils/colors.dart';
 import 'package:omorals/Utils/constant.dart';
-import 'package:omorals/Utils/imagesConstants.dart';
+
+import '../../Utils/imagesConstants.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -135,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               'Date Of Birth : ',
                               style: TextStyle(color: Colors.white),
                             ),
@@ -149,7 +150,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ? '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}'
                                             .toString()
                                         : '${_chosenDateTime.day}-${_chosenDateTime.month}-${_chosenDateTime.year}',
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white),
                                   )),
                             )
                           ],
@@ -161,15 +162,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text(
+                          const Text(
                             'Gender : ',
                             style: TextStyle(color: Colors.white),
                           ),
                           Center(
                             child: DropdownButton(
                               dropdownColor: Colors.black,
-                              style: TextStyle(color: Colors.white),
-                              hint: Text('Please choose a option'),
+                              style: const TextStyle(color: Colors.white),
+                              hint: const Text('Please choose a option'),
                               value: gende,
                               onChanged: (String? newValue) {
                                 setState(() {
@@ -193,15 +194,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text(
+                          const Text(
                             'Role : ',
                             style: TextStyle(color: Colors.white),
                           ),
                           Center(
                             child: DropdownButton(
                               dropdownColor: Colors.black,
-                              style: TextStyle(color: Colors.white),
-                              hint: Text('Please choose a option'),
+                              style: const TextStyle(color: Colors.white),
+                              hint: const Text('Please choose a option'),
                               value: role,
                               onChanged: (String? newValue) {
                                 setState(() {
@@ -239,7 +240,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         checkColor: Colors.white,
-                        title: Text(
+                        title: const Text(
                           'WhatsApp number same as phone number',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -317,7 +318,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Align(
@@ -376,9 +377,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Container(
                               width: getWidth(context),
                               height: getHeight(context),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(localimages.pink_rose),
+                                  image: AssetImage(LocalImages.pink_rose),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -390,10 +391,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Container(
                                 width: width1 / 5,
                                 height: 30,
-                                margin: EdgeInsets.only(top: 18, left: 15),
+                                margin: const EdgeInsets.only(top: 18, left: 15),
                                 alignment: Alignment.centerLeft,
                                 child: Image.asset(
-                                  localimages.flutterWallpaper,
+                                  LocalImages.flutterWallpaper,
                                   scale: 5,
                                 ),
                               ),
@@ -403,7 +404,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       Container(
                         width: getWidth(context),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 16, top: 20, right: 16, bottom: 50),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -450,17 +451,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             // SizedBox(
                             //   height: 30,
                             // ),
-                            Text(
+                            const Text(
                               "Sign up",
                               style: TextStyle(
                                   fontSize: textSizeSMedium,
                                   fontWeight: fontBold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'User name',
                                     style: TextStyle(
@@ -474,7 +475,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Container(
@@ -491,7 +492,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: TextFormField(
                                     controller: usernamecontroller,
                                     keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                       fillColor: Colors.white,
                                       hintStyle: TextStyle(
@@ -501,11 +502,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     )),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Phone Number',
                                     style: TextStyle(
@@ -519,7 +520,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Container(
@@ -541,7 +542,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: DropdownButton(
                                           iconEnabledColor: Colors.white,
                                           value: dropdownvalue,
-                                          icon: Center(
+                                          icon: const Center(
                                               child: Icon(
                                             Icons.keyboard_arrow_down,
                                             size: 18,
@@ -552,7 +553,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                 value: items,
                                                 child: Text(
                                                   items,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize:
                                                           textSizeSmallMedium,
                                                       fontWeight: fontSemibold),
@@ -582,7 +583,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           controller: phoneNoController,
                                           keyboardType:
                                               TextInputType.emailAddress,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             border: InputBorder.none,
                                             fillColor: Colors.white,
                                             hintStyle: TextStyle(
@@ -595,11 +596,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Email address',
                                     style: TextStyle(
@@ -613,7 +614,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Container(
@@ -630,7 +631,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: TextFormField(
                                     controller: emailcontroller,
                                     keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                       fillColor: Colors.white,
                                       hintStyle: TextStyle(
@@ -640,11 +641,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     )),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Password',
                                     style: TextStyle(
@@ -658,7 +659,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Container(
@@ -691,14 +692,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                       border: InputBorder.none,
                                       fillColor: c_White,
-                                      hintStyle: TextStyle(
+                                      hintStyle: const TextStyle(
                                           fontSize: textSizeSmallMedium,
                                           color: hint_text_color),
                                       hintText: "password",
                                     )),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Row(
@@ -719,7 +720,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     },
                                   ),
                                 ),
-                                Expanded(
+                                const Expanded(
                                     flex: 1,
                                     child: Text(
                                       "By creating an account you agree to the our terms and conditions",
@@ -728,42 +729,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ))
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             InkWell(
                               onTap: () {
                                 if (emailcontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill EMail'),
                                   ));
                                 } else if (pwcontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill password'),
                                   ));
                                 } else if (phoneNoController.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill phone number'),
                                   ));
                                 } else if (usernamecontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill user name'),
                                   ));
                                 } else if (valuefirst == false) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text(
@@ -781,7 +782,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   //     Type: "option");
                                 } else {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text(
@@ -794,7 +795,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 width: getWidth(context),
                                 height: 45,
                                 color: container_borderBlueColor,
-                                child: Center(
+                                child: const Center(
                                     child: Text(
                                   "Sign up",
                                   style: TextStyle(
@@ -803,12 +804,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   "Already have an account? ",
                                   style: TextStyle(
                                     fontSize: textSizeSMedium,
@@ -822,7 +823,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     },
                                     child: Container(
                                       width: 30,
-                                      child: Text(
+                                      child: const Text(
                                         "Log in",
                                         style: TextStyle(
                                             fontSize: textSizeSMedium,
@@ -836,7 +837,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             Container(
@@ -851,7 +852,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         onTap: () {
                                           print('terms and conditions');
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Terms",
                                           style: TextStyle(
                                               fontSize: textSizeSMedium,
@@ -860,7 +861,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
+                                  const Expanded(
                                     flex: 1,
                                     child: Center(
                                       child: Text(
@@ -877,7 +878,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       onTap: () {
                                         print('privacyPolicy');
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         "Privacy policy",
                                         style: TextStyle(
                                             fontSize: textSizeSMedium,
@@ -885,7 +886,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
+                                  const Expanded(
                                     flex: 1,
                                     child: Center(
                                       child: Text(
@@ -902,7 +903,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     child: Center(
                                       child: InkWell(
                                         onTap: () {},
-                                        child: Text(
+                                        child: const Text(
                                           "Support",
                                           style: TextStyle(
                                               fontSize: textSizeSMedium,
@@ -935,9 +936,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Container(
                             width: getWidth(context),
                             height: getHeight(context),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage(localimages.pink_flower),
+                                image: AssetImage(LocalImages.pinkFlower),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -949,10 +950,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             child: Container(
                               width: width1 / 5,
                               height: 30,
-                              margin: EdgeInsets.only(top: 57, left: 30),
+                              margin: const EdgeInsets.only(top: 57, left: 30),
                               alignment: Alignment.centerLeft,
                               child: Image.asset(
-                                localimages.flutterWallpaper,
+                                LocalImages.flutterWallpaper,
                                 scale: 5,
                               ),
                             ),
@@ -965,7 +966,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Container(
                         width: getWidth(context),
                         height: getHeight(context),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 80, top: 30, right: 155, bottom: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -1008,26 +1009,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             //     ),
                             //   ),
                             // ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
                               ),
                             ),
-                            Text(
+                            const Text(
                               "Sign up",
                               style: TextStyle(
                                   fontSize: textSizeXXXLarge,
                                   fontWeight: fontBold),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
                               ),
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'User name',
                                     style: TextStyle(
@@ -1041,7 +1042,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -1061,7 +1062,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: TextFormField(
                                     controller: usernamecontroller,
                                     keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                       fillColor: Colors.white,
                                       hintStyle: TextStyle(
@@ -1071,14 +1072,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     )),
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
                               ),
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Phone Number',
                                     style: TextStyle(
@@ -1092,7 +1093,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -1117,7 +1118,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: DropdownButton(
                                           iconEnabledColor: Colors.white,
                                           value: dropdownvalue,
-                                          icon: Center(
+                                          icon: const Center(
                                               child: Icon(
                                             Icons.keyboard_arrow_down,
                                             size: 18,
@@ -1128,7 +1129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                 value: items,
                                                 child: Text(
                                                   items,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize:
                                                           textSizeSmallMedium,
                                                       fontWeight: fontSemibold),
@@ -1152,7 +1153,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       child: TextFormField(
                                           controller: phoneNoController,
                                           keyboardType: TextInputType.phone,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             border: InputBorder.none,
                                             fillColor: Colors.white,
                                             hintStyle: TextStyle(
@@ -1165,14 +1166,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ],
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
                               ),
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Email address',
                                     style: TextStyle(
@@ -1186,7 +1187,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -1206,7 +1207,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: TextFormField(
                                     controller: emailcontroller,
                                     keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                       fillColor: Colors.white,
                                       hintStyle: TextStyle(
@@ -1216,14 +1217,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     )),
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
                               ),
                             ),
                             RichText(
-                              text: TextSpan(children: [
+                              text: const TextSpan(children: [
                                 TextSpan(
                                     text: 'Password',
                                     style: TextStyle(
@@ -1237,7 +1238,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         fontSize: textSizeSMedium)),
                               ]),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -1273,7 +1274,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                       border: InputBorder.none,
                                       fillColor: c_White,
-                                      hintStyle: TextStyle(
+                                      hintStyle: const TextStyle(
                                           fontSize: textSizeSmallMedium,
                                           color: hint_text_color),
                                       hintText: "password",
@@ -1286,7 +1287,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     )),
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -1310,7 +1311,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     },
                                   ),
                                 ),
-                                Expanded(
+                                const Expanded(
                                     flex: 1,
                                     child: Text(
                                       "By creating an account you agree to the our terms and conditions",
@@ -1319,7 +1320,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ))
                               ],
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -1329,35 +1330,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               onTap: () {
                                 if (emailcontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill EMail'),
                                   ));
                                 } else if (pwcontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill password'),
                                   ));
                                 } else if (phoneNoController.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill phone number'),
                                   ));
                                 } else if (usernamecontroller.text.isEmpty) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text('Please fill user name'),
                                   ));
                                 } else if (valuefirst == false) {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     backgroundColor: Colors.red,
                                     behavior: SnackBarBehavior.floating,
                                     content: Text(
@@ -1379,7 +1380,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 width: getWidth(context),
                                 height: 45,
                                 color: container_borderBlueColor,
-                                child: Center(
+                                child: const Center(
                                     child: Text(
                                   "Continue",
                                   style: TextStyle(
@@ -1388,7 +1389,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )),
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -1396,7 +1397,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   "Already have an account? ",
                                   style: TextStyle(
                                     fontSize: textSizeSMedium,
@@ -1410,7 +1411,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     },
                                     child: Container(
                                       width: 30,
-                                      child: Text(
+                                      child: const Text(
                                         "Log in",
                                         style: TextStyle(
                                             fontSize: textSizeSMedium,
@@ -1424,7 +1425,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )
                               ],
                             ),
-                            Expanded(
+                            const Expanded(
                               flex: 1,
                               child: SizedBox(
                                 height: 86,
@@ -1442,7 +1443,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         onTap: () {
                                           print('terms and conditions');
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Terms",
                                           style: TextStyle(
                                               fontSize: textSizeSMedium,
@@ -1451,7 +1452,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
+                                  const Expanded(
                                     flex: 1,
                                     child: Center(
                                       child: Text(
@@ -1470,7 +1471,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         onTap: () {
                                           print('privacyPolicy');
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Privacy policy",
                                           style: TextStyle(
                                               fontSize: textSizeSMedium,
@@ -1479,7 +1480,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
+                                  const Expanded(
                                     flex: 1,
                                     child: Center(
                                       child: Text(
@@ -1496,7 +1497,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     child: Center(
                                       child: InkWell(
                                         onTap: () {},
-                                        child: Text(
+                                        child: const Text(
                                           "Support",
                                           style: TextStyle(
                                               fontSize: textSizeSMedium,
