@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'Config/app_pages.dart';
-import 'Network/logger.dart';
+import 'Network/Logger.dart';
 import 'lang/translation_service.dart';
 
 class MyHttpOverrides extends HttpOverrides {

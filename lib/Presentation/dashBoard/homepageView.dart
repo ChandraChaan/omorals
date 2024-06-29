@@ -3,15 +3,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:omorals/Config/app_pages.dart';
 import 'package:omorals/Presentation/dashBoard/slideShowView.dart';
-import 'package:omorals/utils/constant.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../autherPage/autherPage.dart';
+import '../../Utils/constant.dart';
 import '../editorPage/editorPage.dart';
-import '../voice_page/newAufile.dart';
 
 class HomePageView extends StatefulWidget {
   @override
@@ -56,7 +54,7 @@ class _HomePageViewState extends State<HomePageView> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
         ),
         drawer: GetStorage().read('userName') == null
             ? null
@@ -71,28 +69,28 @@ class _HomePageViewState extends State<HomePageView> {
                             onTap: () {
                               Get.toNamed(Routes.autherPage);
                             },
-                            title: Text('Create Story'),
+                            title: const Text('Create Story'),
                           )
                         else if (GetStorage().read('role') == 'Editor')
                           ListTile(
                             onTap: () {
                               Get.toNamed(Routes.voicePage);
                             },
-                            title: Text('Upload a video'),
+                            title: const Text('Upload a video'),
                           )
                         else
                           ListTile(
                             onTap: () {
                               Get.toNamed(Routes.voicePage);
                             },
-                            title: Text('Upload Voice'),
+                            title: const Text('Upload Voice'),
                           ),
                         ListTile(
                           onTap: () {
                             Get.toNamed(Routes.voicePage);
                             // Get.to(AudHome());
                           },
-                          title: Text('Upload Voice'),
+                          title: const Text('Upload Voice'),
                         ),
                         ListTile(
                           onTap: () {
@@ -101,7 +99,7 @@ class _HomePageViewState extends State<HomePageView> {
                             Navigator.pop(context);
                             Get.toNamed(Routes.homePageView);
                           },
-                          title: Text('Logout'),
+                          title: const Text('Logout'),
                         )
                       ],
                     ),
@@ -137,14 +135,14 @@ class _HomePageViewState extends State<HomePageView> {
                                   //     RoundedRectangleBorder(
                                   //         borderRadius: BorderRadius.circular(50))),
                                   backgroundColor: MaterialStateProperty.all(
-                                      Color(0xff9ef9fe)),
+                                      const Color(0xff9ef9fe)),
                                   shadowColor: MaterialStateProperty.all(
                                       Theme.of(context).colorScheme.onSurface),
                                 ),
                                 onPressed: () {
                                   Get.toNamed(Routes.autherPage);
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Author',
                                   style: TextStyle(color: Color(0xff271a83)),
                                 )),
@@ -157,7 +155,7 @@ class _HomePageViewState extends State<HomePageView> {
                                   //     RoundedRectangleBorder(
                                   //         borderRadius: BorderRadius.circular(50))),
                                   backgroundColor: MaterialStateProperty.all(
-                                      Color(0xff9ef9fe)),
+                                      const Color(0xff9ef9fe)),
                                   shadowColor: MaterialStateProperty.all(
                                       Theme.of(context).colorScheme.onSurface),
                                 ),
@@ -165,7 +163,7 @@ class _HomePageViewState extends State<HomePageView> {
                                   Get.toNamed(Routes.voicePage);
                                   // Get.to(AudHome());
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Voice',
                                   style: TextStyle(color: Color(0xff271a83)),
                                 )),
@@ -178,15 +176,15 @@ class _HomePageViewState extends State<HomePageView> {
                                   //     RoundedRectangleBorder(
                                   //         borderRadius: BorderRadius.circular(50))),
                                   backgroundColor: MaterialStateProperty.all(
-                                      Color(0xff9ef9fe)),
+                                      const Color(0xff9ef9fe)),
                                   shadowColor: MaterialStateProperty.all(
                                       Theme.of(context).colorScheme.onSurface),
                                 ),
                                 onPressed: () {
                                   // Get.toNamed(Routes.login);
-                                  Get.to(EditorPage());
+                                  Get.to(const EditorPage());
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Editor',
                                   style: TextStyle(color: Color(0xff271a83)),
                                 )),
@@ -207,7 +205,7 @@ class _HomePageViewState extends State<HomePageView> {
                           style: Theme.of(context)
                               .textTheme
                               .headline2
-                              ?.copyWith(color: Color(0xff271a83)),
+                              ?.copyWith(color: const Color(0xff271a83)),
                         ),
                       ),
                     )
@@ -226,9 +224,9 @@ class _HomePageViewState extends State<HomePageView> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline4
-                                    ?.copyWith(color: Color(0xff271a83)),
+                                    ?.copyWith(color: const Color(0xff271a83)),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               InkWell(
@@ -287,7 +285,7 @@ class _HomePageViewState extends State<HomePageView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 30,
               child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 Center(
@@ -296,15 +294,15 @@ class _HomePageViewState extends State<HomePageView> {
                           onPressed: () {
                             Get.toNamed(Routes.login);
                           },
-                          child: Text('Login')),
+                          child: const Text('Login')),
                 )
               ]),
             ),
             SideOffer(),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Container(
+            SizedBox(
               height: getHeight(context),
               child: ListView.builder(
                 itemCount: 3,

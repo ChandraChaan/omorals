@@ -12,7 +12,7 @@ class Logger {
 
   static void logLongString(String s) {
 
-      if (s == null || s.length <= 0) return;
+      if (s.isEmpty) return;
       const int n = 1000;
       int startIndex = 0;
       int endIndex = n;
