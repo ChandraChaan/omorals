@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:omorals/Config/app_pages.dart';
-import 'package:omorals/Presentation/dashBoard/slideShowView.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../../Utils/constant.dart';
 import '../editorPage/editorPage.dart';
 
 class HomePageView extends StatefulWidget {
@@ -18,33 +15,58 @@ class HomePageView extends StatefulWidget {
 
 class _HomePageViewState extends State<HomePageView> {
   List<dynamic> videosList = [];
-  String Wmsg = '';
+  List<dynamic> filteredVideosList = [];
+  String Wmsg = 'Fetching videos...';
+  bool isLoading = true;
 
-  Future<http.Response> postRequest() async {
-    videosList.clear();
-    var url = Uri.parse(
-        'https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=UCdBiq4YsDqFGBrX1s1JCc4w&maxResults=100&key=REMOVED_API_KEY');
-    var response = await http.get(url);
-    var dat = json.decode(response.body);
-    print(response.statusCode);
-    print(response.body);
-    if (response.statusCode == 200) {
-      for (int a = 0; a < dat['items'].length; a++) {
-        if (dat['items'][a]['id']['kind'] != 'youtube#playlist')
-          videosList.add(dat['items'][a]);
+  Future<void> fetchVideos() async {
+    try {
+      var url = Uri.parse(
+          'https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=UCdBiq4YsDqFGBrX1s1JCc4w&maxResults=100&key=REMOVED_API_KEY');
+      var response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body);
+        setState(() {
+          videosList = data['items']
+              .where((item) => item['id']['kind'] == 'youtube#video')
+              .toList();
+          filteredVideosList = videosList;
+          Wmsg = videosList.isEmpty ? 'No videos available at the moment.' : '';
+        });
+      } else if (response.statusCode == 403) {
+        setState(() {
+          Wmsg = 'Unable to fetch videos. Please contact Chandra.';
+        });
+      } else {
+        setState(() {
+          Wmsg = 'An error occurred. Please try again later.';
+        });
       }
-      setState(() {});
+    } catch (e) {
+      setState(() {
+        Wmsg = 'An error occurred. Please check your connection.';
+      });
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
-    if (response.statusCode == 403) {
-      Wmsg = 'Unable fetch Videos, \nContact to Chandra';
-    }
-    return response;
   }
 
   @override
   void initState() {
-    postRequest();
     super.initState();
+    fetchVideos();
+  }
+
+  void filterVideos(String query) {
+    setState(() {
+      filteredVideosList = videosList
+          .where((video) =>
+          video['snippet']['title'].toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -55,329 +77,175 @@ class _HomePageViewState extends State<HomePageView> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           iconTheme: const IconThemeData(color: Colors.black),
+          title: TextField(
+            decoration: const InputDecoration(
+              hintText: 'Search videos...',
+              border: InputBorder.none,
+              prefixIcon: Icon(Icons.search, color: Colors.black),
+            ),
+            onChanged: filterVideos,
+          ),
         ),
-        drawer: GetStorage().read('userName') == null
-            ? null
-            : Drawer(
-                child: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: ListView(
-                      children: <Widget>[
-                        if (GetStorage().read('role') == 'Author')
-                          ListTile(
-                            onTap: () {
-                              Get.toNamed(Routes.autherPage);
-                            },
-                            title: const Text('Create Story'),
-                          )
-                        else if (GetStorage().read('role') == 'Editor')
-                          ListTile(
-                            onTap: () {
-                              Get.toNamed(Routes.voicePage);
-                            },
-                            title: const Text('Upload a video'),
-                          )
-                        else
-                          ListTile(
-                            onTap: () {
-                              Get.toNamed(Routes.voicePage);
-                            },
-                            title: const Text('Upload Voice'),
-                          ),
-                        ListTile(
-                          onTap: () {
-                            Get.toNamed(Routes.voicePage);
-                            // Get.to(AudHome());
-                          },
-                          title: const Text('Upload Voice'),
-                        ),
-                        ListTile(
-                          onTap: () {
-                            // Get.back();
-                            GetStorage().erase();
-                            Navigator.pop(context);
-                            Get.toNamed(Routes.homePageView);
-                          },
-                          title: const Text('Logout'),
-                        )
-                      ],
+        drawer: _buildDrawer(),
+        body: Column(
+          children: [
+            _buildHeader(),
+            Expanded(
+              child: isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : filteredVideosList.isEmpty
+                  ? Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    Wmsg,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(color: const Color(0xff271a83)),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+                  : _buildVideoList(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Drawer? _buildDrawer() {
+    return GetStorage().read('userName') == null
+        ? null
+        : Drawer(
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: ListView(
+            children: <Widget>[
+              if (GetStorage().read('role') == 'Author')
+                _buildDrawerItem('Create Story', Routes.autherPage)
+              else if (GetStorage().read('role') == 'Editor')
+                _buildDrawerItem('Upload a Video', Routes.voicePage)
+              else
+                _buildDrawerItem('Upload Voice', Routes.voicePage),
+              _buildDrawerItem('Upload Voice', Routes.voicePage),
+              _buildDrawerItem('Logout', Routes.homePageView, logout: true),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerItem(String title, String route, {bool logout = false}) {
+    return ListTile(
+      onTap: () {
+        if (logout) {
+          GetStorage().erase();
+          Navigator.pop(context);
+          Get.toNamed(route);
+        } else {
+          Get.toNamed(route);
+        }
+      },
+      title: Text(title),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Center(
+        child: GetStorage().read('userName') == null
+            ? _buildRoleSelectionButtons()
+            : Text('Welcome ${GetStorage().read('userName')}'),
+      ),
+    );
+  }
+
+  Widget _buildRoleSelectionButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildRoleButton('Author', Routes.autherPage),
+        _buildRoleButton('Voice', Routes.voicePage),
+        _buildRoleButton('Editor', const EditorPage()),
+      ],
+    );
+  }
+
+  Widget _buildRoleButton(String role, dynamic route) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        foregroundColor: const Color(0xff271a83),
+        backgroundColor: const Color(0xff9ef9fe),
+      ),
+      onPressed: () {
+        if (route is String) {
+          Get.toNamed(route);
+        } else {
+          Get.to(route);
+        }
+      },
+      child: Text(role),
+    );
+  }
+
+  Widget _buildVideoList() {
+    return ListView.builder(
+      itemCount: filteredVideosList.length,
+      itemBuilder: (BuildContext context, int index) {
+        var video = filteredVideosList[index];
+        var title = video['snippet']['title'];
+        var thumbnailUrl = video['snippet']['thumbnails']['high']['url'];
+        var videoUrl = "https://www.youtube.com/watch?v=${video['id']['videoId']}";
+
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  title: Text(
+                    title,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(color: const Color(0xff271a83)),
+                  ),
+                  subtitle: Text('Published on ${video['snippet']['publishedAt']}'),
+                ),
+                InkWell(
+                  onTap: () async {
+                    await launchUrl(
+                      Uri.parse(videoUrl),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(thumbnailUrl),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                 ),
-              ),
-        body: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                child: GetStorage().read('userName') == null
-                    ? Padding(
-                        padding: EdgeInsets.only(
-                          top: 12,
-                          bottom: 12,
-                          right: double.parse(
-                              (MediaQuery.of(context).size.width / 5)
-                                  .toString()),
-                          left: double.parse(
-                              (MediaQuery.of(context).size.width / 5)
-                                  .toString()),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                                style: ButtonStyle(
-                                  padding: MaterialStateProperty.all(
-                                      const EdgeInsets.all(0)),
-                                  elevation: MaterialStateProperty.all(8),
-                                  // shape: MaterialStateProperty.all(
-                                  //     RoundedRectangleBorder(
-                                  //         borderRadius: BorderRadius.circular(50))),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      const Color(0xff9ef9fe)),
-                                  shadowColor: MaterialStateProperty.all(
-                                      Theme.of(context).colorScheme.onSurface),
-                                ),
-                                onPressed: () {
-                                  Get.toNamed(Routes.autherPage);
-                                },
-                                child: const Text(
-                                  'Author',
-                                  style: TextStyle(color: Color(0xff271a83)),
-                                )),
-                            TextButton(
-                                style: ButtonStyle(
-                                  padding: MaterialStateProperty.all(
-                                      const EdgeInsets.all(0)),
-                                  elevation: MaterialStateProperty.all(8),
-                                  // shape: MaterialStateProperty.all(
-                                  //     RoundedRectangleBorder(
-                                  //         borderRadius: BorderRadius.circular(50))),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      const Color(0xff9ef9fe)),
-                                  shadowColor: MaterialStateProperty.all(
-                                      Theme.of(context).colorScheme.onSurface),
-                                ),
-                                onPressed: () {
-                                  Get.toNamed(Routes.voicePage);
-                                  // Get.to(AudHome());
-                                },
-                                child: const Text(
-                                  'Voice',
-                                  style: TextStyle(color: Color(0xff271a83)),
-                                )),
-                            TextButton(
-                                style: ButtonStyle(
-                                  padding: MaterialStateProperty.all(
-                                      const EdgeInsets.all(0)),
-                                  elevation: MaterialStateProperty.all(8),
-                                  // shape: MaterialStateProperty.all(
-                                  //     RoundedRectangleBorder(
-                                  //         borderRadius: BorderRadius.circular(50))),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      const Color(0xff9ef9fe)),
-                                  shadowColor: MaterialStateProperty.all(
-                                      Theme.of(context).colorScheme.onSurface),
-                                ),
-                                onPressed: () {
-                                  // Get.toNamed(Routes.login);
-                                  Get.to(const EditorPage());
-                                },
-                                child: const Text(
-                                  'Editor',
-                                  style: TextStyle(color: Color(0xff271a83)),
-                                )),
-                          ],
-                        ),
-                      )
-                    : Text('WellCome ${GetStorage().read('userName')}'),
-              ),
+              ],
             ),
-            Expanded(
-              flex: 9,
-              child: videosList.length <= 0
-                  ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(58.0),
-                        child: Text(
-                          Wmsg,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline2
-                              ?.copyWith(color: const Color(0xff271a83)),
-                        ),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: videosList.length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(58.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                videosList[index]['snippet']['title'],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline4
-                                    ?.copyWith(color: const Color(0xff271a83)),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              InkWell(
-                                onTap: () async {
-                                  launchUrl(
-                                      Uri.parse(
-                                          "https://www.youtube.com/watch?v=${videosList[index]['id']['videoId']}"),
-                                      mode: LaunchMode.externalApplication);
-                                },
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 360,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(videosList[index]
-                                                ['snippet']['thumbnails']
-                                            ['high']['url']),
-                                        fit: BoxFit.fitWidth,
-                                      ),
-                                      color: const Color(0xff9ef9fe),
-                                      border: Border.all(
-                                        color: const Color(0xff9ef9fe),
-                                      ),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(20))),
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      }),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget youtubePlay(BuildContext context, int index) {
-    return YoutubePlayer(
-      controller: YoutubePlayerController.fromVideoId(
-        videoId: '${videosList[index]['id']['videoId']}',
-        autoPlay: false,
-        params: const YoutubePlayerParams(
-          strictRelatedVideos: true,
-          showControls: true,
-          showFullscreenButton: true,
-        ),
-      ),
-      aspectRatio: 16 / 9,
-    );
-  }
-
-  Widget OldBuild(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
-              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                Center(
-                  child: GetStorage().read('userName') ??
-                      TextButton(
-                          onPressed: () {
-                            Get.toNamed(Routes.login);
-                          },
-                          child: const Text('Login')),
-                )
-              ]),
-            ),
-            SideOffer(),
-            const SizedBox(
-              height: 50,
-            ),
-            SizedBox(
-              height: getHeight(context),
-              child: ListView.builder(
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        height: MediaQuery.of(context).size.height / 2,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.red,
-                            ),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20))),
-                        child: Center(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                "Title",
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: 'Enter the Title',
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: MediaQuery.of(context).size.height / 5,
-                                color: Colors.green,
-                                child: const Center(
-                                  child: Text("Video"),
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                "Description",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: 'Enter the description',
-                                ),
-                              ),
-                            )
-                          ],
-                        ))),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
