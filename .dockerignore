@@ -1,0 +1,4 @@
+# The image only needs the built bundle and the nginx config.
+*
+!dist
+!docker
