@@ -20,7 +20,7 @@ try {
 function init() {
   const small = () => innerWidth < 820;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, small() ? 1.5 : 1.75));
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -47,7 +47,6 @@ function init() {
   /* ── Materials ── */
   const pearl = new THREE.MeshPhysicalMaterial({
     color: 0xf3eee5, roughness: 0.28, metalness: 0.05, clearcoat: 1, clearcoatRoughness: 0.18,
-    iridescence: 0.35, iridescenceIOR: 1.5, sheen: 0.4, sheenColor: new THREE.Color(0xffc9a8),
   });
   const chrome = new THREE.MeshPhysicalMaterial({
     color: 0x12141c, roughness: 0.2, metalness: 1, clearcoat: 1, clearcoatRoughness: 0.12,
@@ -289,7 +288,7 @@ function init() {
   function resize() {
     const w = innerWidth;
     const h = innerHeight;
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, small() ? 1.5 : 1.75));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
     renderer.setSize(w, h, false);
     dustMat.uniforms.uPR.value = renderer.getPixelRatio();
     camera.aspect = w / h;

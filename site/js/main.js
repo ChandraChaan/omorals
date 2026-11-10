@@ -35,7 +35,7 @@
   /* ───────────── Smooth scroll ───────────── */
   let lenis = null;
   if (!reduce && window.Lenis) {
-    lenis = new Lenis({ lerp: 0.095, wheelMultiplier: 1, smoothWheel: true });
+    lenis = new Lenis({ lerp: 0.13, wheelMultiplier: 1, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -111,30 +111,40 @@
       .from('.nav > *', { y: -24, opacity: 0, duration: 1, stagger: 0.07 }, 0.5);
   }
 
-  /* ───────────── Cursor ───────────── */
+  /* ───────────── Cursor ─────────────
+     The system cursor stays visible, so pointing is always instant. A thin
+     ring trails it and a label sits beside it over special targets. The
+     follower runs its own tiny loop and sleeps as soon as it has caught up. */
   if (fine && !reduce) {
     const cur = $('.cursor');
-    const dot = $('.cursor-dot');
     const label = $('.cursor__label');
-    const cx = gsap.quickTo(cur, 'x', { duration: 0.55, ease: 'power3' });
-    const cy = gsap.quickTo(cur, 'y', { duration: 0.55, ease: 'power3' });
-    const dx = gsap.quickSetter(dot, 'x', 'px');
-    const dy = gsap.quickSetter(dot, 'y', 'px');
+    let tx = 0, ty = 0, x = 0, y = 0, running = false, placed = false;
+    const step = () => {
+      x += (tx - x) * 0.34;
+      y += (ty - y) * 0.34;
+      if (Math.abs(tx - x) < 0.1 && Math.abs(ty - y) < 0.1) { x = tx; y = ty; running = false; }
+      cur.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
+      if (running) requestAnimationFrame(step);
+    };
     window.addEventListener('pointermove', (e) => {
-      html.classList.add('has-cursor');
-      cx(e.clientX); cy(e.clientY); dx(e.clientX); dy(e.clientY);
+      if (e.pointerType !== 'mouse') return;
+      tx = e.clientX; ty = e.clientY;
+      if (!placed) { placed = true; x = tx; y = ty; html.classList.add('has-cursor'); }
+      if (!running) { running = true; requestAnimationFrame(step); }
     }, { passive: true });
     document.addEventListener('pointerover', (e) => {
       const t = e.target instanceof Element ? e.target : null;
       const tagged = t && t.closest('[data-cursor]');
-      const link = t && t.closest('a, button, label, .pick span');
+      const typing = t && t.closest('input, textarea');
+      const link = t && t.closest('a, button, label');
       cur.classList.toggle('is-label', !!tagged);
-      cur.classList.toggle('is-link', !tagged && !!link);
+      cur.classList.toggle('is-text', !tagged && !!typing);
+      cur.classList.toggle('is-link', !tagged && !typing && !!link);
       if (tagged) label.textContent = tagged.dataset.cursor;
-    });
-    document.addEventListener('pointerdown', () => gsap.to(cur, { scale: 0.8, duration: 0.25 }));
-    document.addEventListener('pointerup', () => gsap.to(cur, { scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.5)' }));
-    document.addEventListener('pointerleave', () => html.classList.remove('has-cursor'));
+    }, { passive: true });
+    window.addEventListener('pointerdown', () => cur.classList.add('is-down'), { passive: true });
+    window.addEventListener('pointerup', () => cur.classList.remove('is-down'), { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => { html.classList.remove('has-cursor'); placed = false; });
   }
 
   window.addEventListener('pointermove', (e) => {
