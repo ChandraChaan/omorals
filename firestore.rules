@@ -1,0 +1,148 @@
+rules_version = '2';
+
+// OMorals Workspace security rules.
+//
+// Roles    : owner > admin > manager > member
+// Depts    : youtube | marketing | development
+// Statuses : pending (just signed up) | active | disabled
+//
+// The very first person to sign in claims the workspace (meta/workspace) and
+// becomes the owner. Everyone after that starts as a pending member and can
+// see nothing until an owner/admin activates them.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function uid() { return request.auth.uid; }
+    function userPath(id) { return /databases/$(database)/documents/users/$(id); }
+    function me() { return get(userPath(uid())).data; }
+    function active() {
+      return signedIn() && exists(userPath(uid())) && me().status == 'active';
+    }
+    function isAdmin() { return active() && me().role in ['owner', 'admin']; }
+    function isManager() { return active() && me().role in ['owner', 'admin', 'manager']; }
+    function inDept(d) {
+      return active() && (me().role in ['owner', 'admin', 'manager'] || me().dept == d);
+    }
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+
+    // ---- Workspace claim -------------------------------------------------
+    match /meta/workspace {
+      allow get: if signedIn();
+      // "create" can only succeed while the document does not exist yet.
+      allow create: if signedIn() && request.resource.data.ownerUid == uid();
+      allow update: if isAdmin() && request.resource.data.ownerUid == resource.data.ownerUid;
+    }
+
+    // ---- People ----------------------------------------------------------
+    match /users/{userId} {
+      allow read: if signedIn() && (userId == uid() || active());
+
+      allow create: if signedIn() && userId == uid() && (
+        // normal sign-up: pending member
+        (request.resource.data.role == 'member' && request.resource.data.status == 'pending')
+        // workspace owner, written in the same batch as meta/workspace
+        || (request.resource.data.role == 'owner' && request.resource.data.status == 'active'
+            && getAfter(/databases/$(database)/documents/meta/workspace).data.ownerUid == uid())
+      );
+
+      allow update: if signedIn() && (
+        // anyone can edit their own basic profile
+        (userId == uid() && changed().hasOnly(['name', 'photoUrl', 'phone', 'lastSeenAt']))
+        // admins manage role, department, status and targets
+        || (isAdmin()
+            && changed().hasOnly(['name', 'role', 'dept', 'status', 'title', 'dailyCallTarget', 'phone'])
+            && (
+              // the owner's role and status can never be changed
+              (resource.data.role == 'owner'
+                && request.resource.data.role == 'owner'
+                && request.resource.data.status == 'active')
+              || (resource.data.role != 'owner'
+                && request.resource.data.role in ['admin', 'manager', 'member'])
+            ))
+      );
+
+      allow delete: if isAdmin() && resource.data.role != 'owner';
+    }
+
+    // ---- Projects --------------------------------------------------------
+    match /projects/{id} {
+      allow read: if active();
+      allow create, update, delete: if isManager();
+    }
+
+    // ---- Tasks -----------------------------------------------------------
+    match /tasks/{id} {
+      allow read: if active();
+      allow create: if active() && request.resource.data.reporterId == uid();
+      allow update: if isManager()
+        || (active() && (resource.data.assigneeId == uid() || resource.data.reporterId == uid()));
+      allow delete: if isManager() || (active() && resource.data.reporterId == uid());
+
+      match /comments/{cid} {
+        allow read: if active();
+        allow create: if active() && request.resource.data.authorId == uid();
+        allow delete: if isManager() || (active() && resource.data.authorId == uid());
+      }
+    }
+
+    // ---- YouTube video pipeline -----------------------------------------
+    match /videos/{id} {
+      allow read: if active();
+      allow create, update: if inDept('youtube');
+      allow delete: if isManager();
+    }
+
+    // ---- Leads (marketing CRM) ------------------------------------------
+    // Callers only ever see and touch the leads assigned to them.
+    match /leads/{id} {
+      allow read: if isManager() || (inDept('marketing') && resource.data.ownerId == uid());
+      allow create: if isManager()
+        || (inDept('marketing') && request.resource.data.ownerId == uid());
+      allow update: if isManager()
+        || (inDept('marketing') && resource.data.ownerId == uid()
+            && request.resource.data.ownerId == uid());
+      allow delete: if isManager();
+    }
+
+    // ---- Call log --------------------------------------------------------
+    // A caller can only log calls as themselves, stamped with the server's
+    // clock, and cannot edit or delete a call afterwards. That keeps the
+    // numbers honest.
+    match /calls/{id} {
+      allow read: if isManager() || (active() && resource.data.callerId == uid());
+      allow create: if isAdmin()
+        || (inDept('marketing')
+            && request.resource.data.callerId == uid()
+            && request.resource.data.at == request.time);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---- Website enquiries (public contact form) ------------------------
+    match /inquiries/{id} {
+      allow create: if request.resource.data.keys().hasOnly(
+            ['name', 'contact', 'service', 'message', 'status', 'source', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 80
+        && request.resource.data.contact is string
+        && request.resource.data.contact.size() >= 5 && request.resource.data.contact.size() <= 120
+        // "service" is a reserved word in rules, hence the bracket access
+        && request.resource.data['service'] is string && request.resource.data['service'].size() <= 40
+        && request.resource.data.message is string && request.resource.data.message.size() <= 2000
+        && request.resource.data.status == 'new'
+        && request.resource.data.source == 'website'
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt > request.time - duration.value(1, 'd')
+        && request.resource.data.createdAt < request.time + duration.value(1, 'd');
+      allow read, update, delete: if isManager();
+    }
+
+    // ---- Activity feed ---------------------------------------------------
+    match /activity/{id} {
+      allow read: if active();
+      allow create: if active() && request.resource.data.actorId == uid();
+      allow delete: if isAdmin();
+    }
+  }
+}

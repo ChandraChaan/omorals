@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en" class="is-loading">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>OMorals Media — YouTube studio, digital marketing, web &amp; mobile apps</title>
+  <meta name="description" content="OMorals Media is one studio with three crafts: we run the Original Morals YouTube channel, grow brands with digital marketing, and build websites and Flutter mobile apps.">
+  <meta name="theme-color" content="#07080c">
+  <link rel="canonical" href="https://omorals.web.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OMorals Media">
+  <meta property="og:title" content="OMorals Media — things worth watching, sharing &amp; using">
+  <meta property="og:description" content="A YouTube studio, a digital marketing team and an app engineering shop under one roof.">
+  <meta property="og:url" content="https://omorals.web.app/">
+  <meta property="og:image" content="https://omorals.web.app/img/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/img/icon-180.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="modulepreload" href="/vendor/three.bundle.min.js">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OMorals Media",
+    "url": "https://omorals.web.app/",
+    "email": "info@omorals.com",
+    "description": "YouTube studio, digital marketing team and web & mobile app development.",
+    "sameAs": ["https://www.youtube.com/channel/UCdBiq4YsDqFGBrX1s1JCc4w"]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ───────────────────────── Preloader ───────────────────────── -->
+<div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading OMorals Media">
+  <div class="loader__top">
+    <span class="loader__brand">OMorals Media</span>
+    <span class="loader__words" aria-hidden="true">
+      <span class="loader__words-track">
+        <span>Stories</span><span>Brands</span><span>Apps</span><span>Stories</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="loader__mark" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <circle class="loader__ring-bg" cx="100" cy="100" r="78"/>
+      <circle class="loader__ring" id="loaderRing" cx="100" cy="100" r="78" pathLength="100"/>
+      <path class="loader__play" d="M86 70 L134 100 L86 130 Z"/>
+    </svg>
+  </div>
+
+  <div class="loader__bottom">
+    <span class="loader__hint">Loading the studio</span>
+    <span class="loader__count" aria-hidden="true"><span id="loaderCount">000</span></span>
+  </div>
+</div>
+
+<!-- ───────────────────────── Fixed stage ───────────────────────── -->
+<div class="stage" aria-hidden="true">
+  <div class="stage__glow stage__glow--a"></div>
+  <div class="stage__glow stage__glow--b"></div>
+  <canvas id="scene"></canvas>
+  <div class="stage__grain"></div>
+</div>
+
+<div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ───────────────────────── Navigation ───────────────────────── -->
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top" aria-label="OMorals Media, home">
+    <svg class="nav__mark" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="6"/>
+      <path d="M17 13.5 L28 20 L17 26.5 Z" fill="var(--accent)"/>
+    </svg>
+    <span class="nav__word">Morals</span>
+  </a>
+
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#youtube"><span>YouTube</span></a>
+    <a href="#marketing"><span>Marketing</span></a>
+    <a href="#apps"><span>Apps</span></a>
+    <a href="#process"><span>Process</span></a>
+    <a href="#contact"><span>Contact</span></a>
+  </nav>
+
+  <div class="nav__actions">
+    <a class="nav__login" href="/app/" data-cursor="Open">Team login</a>
+    <a class="btn btn--sm" href="#contact" data-magnetic><span class="btn__text">Start a project</span></a>
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="menu__links" aria-label="Mobile">
+    <a href="#youtube"><em>01</em><span>YouTube Studio</span></a>
+    <a href="#marketing"><em>02</em><span>Digital Marketing</span></a>
+    <a href="#apps"><em>03</em><span>Web &amp; Mobile Apps</span></a>
+    <a href="#process"><em>04</em><span>Process</span></a>
+    <a href="#contact"><em>05</em><span>Contact</span></a>
+  </nav>
+  <div class="menu__foot">
+    <a href="/app/">Team login →</a>
+    <a href="mailto:info@omorals.com">info@omorals.com</a>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- ───────────────────────── Hero ───────────────────────── -->
+  <section class="hero" data-scene="hero" data-glow="orange">
+    <div class="stage-slot stage-slot--hero" data-anchor="ring" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="eyebrow" data-reveal="fade"><i></i>OMorals Media — one studio, three crafts</p>
+
+      <h1 class="hero__title" aria-label="We make things worth watching, sharing and using.">
+        <span class="line" aria-hidden="true"><span class="line__in">We make things</span></span>
+        <span class="line" aria-hidden="true"><span class="line__in">worth <em>watching,</em></span></span>
+        <span class="line" aria-hidden="true"><span class="line__in"><em>sharing</em> &amp; <em>using.</em></span></span>
+      </h1>
+
+      <div class="hero__row">
+        <p class="hero__lead" data-reveal="fade">
+          A YouTube studio, a digital marketing team and an app engineering shop — working at the same desk, on the same board, for the same result.
+        </p>
+        <div class="hero__cta" data-reveal="fade">
+          <a class="btn" href="#contact" data-magnetic><span class="btn__text">Start a project</span><span class="btn__icon" aria-hidden="true">↗</span></a>
+          <a class="btn btn--ghost" href="https://www.youtube.com/channel/UCdBiq4YsDqFGBrX1s1JCc4w" target="_blank" rel="noopener" data-magnetic>
+            <span class="btn__play" aria-hidden="true"></span><span class="btn__text">Watch the channel</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <ol class="hero__index" data-reveal="fade">
+      <li><a href="#youtube"><b>01</b> YouTube Studio</a></li>
+      <li><a href="#marketing"><b>02</b> Digital Marketing</a></li>
+      <li><a href="#apps"><b>03</b> Web &amp; Mobile Apps</a></li>
+    </ol>
+
+    <div class="hero__scroll" aria-hidden="true"><span></span>Scroll</div>
+  </section>
+
+  <!-- ───────────────────────── Marquee ───────────────────────── -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marquee">
+      <span>Scripts</span><i>✺</i><span>Voice-over</span><i>✺</i><span><em>Editing</em></span><i>✺</i><span>Thumbnails</span><i>✺</i><span>Channel SEO</span><i>✺</i><span><em>Social media</em></span><i>✺</i><span>Performance ads</span><i>✺</i><span>Lead generation</span><i>✺</i><span><em>Websites</em></span><i>✺</i><span>Flutter apps</span><i>✺</i><span>Firebase</span><i>✺</i>
+    </div>
+  </div>
+
+  <!-- ───────────────────────── Manifesto ───────────────────────── -->
+  <section class="manifesto" data-scene="manifesto" data-glow="orange">
+    <p class="eyebrow"><i></i>Why one studio</p>
+    <p class="manifesto__text" id="manifesto">
+      Most teams can film, or market, or code. We do all three at one desk — so the story you tell, the audience you reach and the product they land on feel like <em>one thing.</em>
+    </p>
+  </section>
+
+  <!-- ───────────────────────── 01 YouTube ───────────────────────── -->
+  <section class="craft craft--right" id="youtube" data-glow="red">
+    <div class="stage-slot" data-anchor="ring" aria-hidden="true"></div>
+    <div class="craft__body" data-scene="youtube">
+      <div class="craft__num" aria-hidden="true">01</div>
+      <p class="eyebrow"><i></i>YouTube Studio</p>
+      <h2 class="display" data-split>Stories people <em>finish.</em></h2>
+      <p class="craft__lead" data-reveal>
+        We run <strong>Original Morals</strong> — Telugu stories, history and science for curious kids and their families — and we produce for other channels with the very same pipeline: research, script, voice, edit, thumbnail, publish.
+      </p>
+
+      <ul class="chips" data-reveal aria-label="Series on the channel">
+        <li>Bujji &amp; Chinni Kathalu</li>
+        <li>Why did the empire fall?</li>
+        <li>Tinku Adige Prashnalu</li>
+        <li>Chittilata</li>
+      </ul>
+
+      <ul class="list" data-reveal-list>
+        <li><b>Research &amp; scripting</b><span>Fact-checked, written to be spoken.</span></li>
+        <li><b>Voice-over &amp; sound</b><span>Clean narration, music and mix.</span></li>
+        <li><b>Editing &amp; motion</b><span>Long-form, Shorts and reels.</span></li>
+        <li><b>Thumbnails &amp; titles</b><span>Designed and tested for the click.</span></li>
+        <li><b>Channel SEO &amp; scheduling</b><span>Published on time, every time.</span></li>
+      </ul>
+    </div>
+
+    <div class="reel" data-reveal data-scene="reel">
+      <div class="reel__head">
+        <h3>Latest from the channel</h3>
+        <a class="link" href="https://www.youtube.com/channel/UCdBiq4YsDqFGBrX1s1JCc4w?sub_confirmation=1" target="_blank" rel="noopener">Subscribe on YouTube <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="reel__track" id="reel" data-cursor="Drag" tabindex="0" aria-label="Latest videos">
+        <!-- filled from /videos.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── 02 Marketing ───────────────────────── -->
+  <section class="craft craft--left" id="marketing" data-glow="green">
+    <div class="stage-slot" data-anchor="chart" aria-hidden="true"></div>
+    <div class="craft__body" data-scene="marketing">
+      <div class="craft__num" aria-hidden="true">02</div>
+      <p class="eyebrow"><i></i>Digital Marketing</p>
+      <h2 class="display" data-split>Marketing that <em>picks up</em> the phone.</h2>
+      <p class="craft__lead" data-reveal>
+        A campaign is only half the job. Our team follows every lead with a real call, writes down every conversation, and tells you what actually happened — not just what was spent.
+      </p>
+
+      <ul class="list" data-reveal-list>
+        <li><b>Social media</b><span>Content calendars, reels, community.</span></li>
+        <li><b>Performance ads</b><span>Meta and Google, managed daily.</span></li>
+        <li><b>SEO &amp; content</b><span>Pages that rank and read well.</span></li>
+        <li><b>Lead generation &amp; calling</b><span>Every lead called, every call logged.</span></li>
+        <li><b>WhatsApp &amp; email</b><span>Follow-ups that feel personal.</span></li>
+        <li><b>Reporting</b><span>One page, plain language, every week.</span></li>
+      </ul>
+    </div>
+
+    <aside class="ticket" data-tilt data-reveal aria-label="Sample call log">
+      <header><span class="dot"></span>Call log <em>sample</em></header>
+      <ol>
+        <li><time>10:42</time><span>Clinic, new enquiry</span><b class="tag tag--ok">Interested</b></li>
+        <li><time>10:57</time><span>Boutique, follow-up</span><b class="tag tag--warn">Call back Thu</b></li>
+        <li><time>11:15</time><span>Coaching centre</span><b class="tag">No answer</b></li>
+        <li><time>11:31</time><span>Restaurant, demo done</span><b class="tag tag--ok">Won</b></li>
+      </ol>
+      <footer>Every conversation is written down the minute it ends.</footer>
+    </aside>
+  </section>
+
+  <!-- ───────────────────────── 03 Apps ───────────────────────── -->
+  <section class="craft craft--right" id="apps" data-glow="blue">
+    <div class="stage-slot" data-anchor="device" aria-hidden="true"></div>
+    <div class="craft__body" data-scene="apps">
+      <div class="craft__num" aria-hidden="true">03</div>
+      <p class="eyebrow"><i></i>Web &amp; Mobile Apps</p>
+      <h2 class="display" data-split>Apps and sites built to be <em>used.</em></h2>
+      <p class="craft__lead" data-reveal>
+        Flutter apps for Android and iOS, fast websites and Firebase back-ends — designed, built, released and looked after by the same people. This site, and the workspace our team runs on, are our own work.
+      </p>
+
+      <ul class="list" data-reveal-list>
+        <li><b>Mobile apps</b><span>Flutter, one codebase, Android and iOS.</span></li>
+        <li><b>Websites</b><span>Fast, searchable, easy to update.</span></li>
+        <li><b>Back-ends &amp; dashboards</b><span>Firebase, auth, admin panels.</span></li>
+        <li><b>Store release</b><span>Play Store and App Store, handled.</span></li>
+        <li><b>Care</b><span>Updates, fixes and monitoring after launch.</span></li>
+      </ul>
+    </div>
+
+    <div class="work" data-reveal-list data-scene="work">
+      <a class="work__card" data-tilt data-cursor="Open" href="https://chandrachaan.github.io/upi-split/" target="_blank" rel="noopener">
+        <span class="work__kind">Web app</span>
+        <h3>UPI Split</h3>
+        <p>Split a bill and send every friend their own UPI payment link. No sign-up, nothing stored on a server.</p>
+        <span class="work__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="work__card" data-tilt data-cursor="Open" href="https://chittilata-game.web.app" target="_blank" rel="noopener">
+        <span class="work__kind">Game</span>
+        <h3>Chittilata</h3>
+        <p>చిట్టిలాట — the Telugu paper-slip game, rebuilt for friends and family to play on their phones.</p>
+        <span class="work__go" aria-hidden="true">↗</span>
+      </a>
+      <a class="work__card" data-tilt data-cursor="Open" href="https://github.com/ChandraChaan/flutter-release-kit" target="_blank" rel="noopener">
+        <span class="work__kind">Developer tool</span>
+        <h3>Flutter Release Kit</h3>
+        <p>An open-source toolkit that gets Flutter apps through Play Store and App Store review without rejections.</p>
+        <span class="work__go" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── Process (horizontal) ───────────────────────── -->
+  <section class="process" id="process" data-scene="process" data-glow="orange">
+    <div class="process__pin">
+      <div class="process__head">
+        <p class="eyebrow"><i></i>How a project runs</p>
+        <h2 class="display">Five steps. <em>No surprises.</em></h2>
+      </div>
+      <div class="process__rail" id="rail">
+        <article class="step"><span class="step__n">01</span><h3>Listen</h3><p>One call to understand the goal, the audience and the budget. We ask more than we pitch.</p></article>
+        <article class="step"><span class="step__n">02</span><h3>Plan</h3><p>A written plan with scope, timeline and price. You know what you get before anything starts.</p></article>
+        <article class="step"><span class="step__n">03</span><h3>Make</h3><p>Scripts, campaigns or code. Work moves across a shared board, so progress is visible every day.</p></article>
+        <article class="step"><span class="step__n">04</span><h3>Launch</h3><p>Publish the video, switch on the campaign, release to the stores. We stay for launch day.</p></article>
+        <article class="step"><span class="step__n">05</span><h3>Grow</h3><p>Measure, report in plain language, improve. Then do it again, a little better.</p></article>
+      </div>
+      <div class="process__bar" aria-hidden="true"><span id="railBar"></span></div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── Workspace teaser ───────────────────────── -->
+  <section class="board" data-scene="board" data-glow="orange">
+    <div class="board__copy">
+      <p class="eyebrow"><i></i>How we stay honest</p>
+      <h2 class="display" data-split>Every video, task and call on <em>one board.</em></h2>
+      <p class="craft__lead" data-reveal>
+        We built our own workspace. Each video shows its stage, each task its owner, each call its outcome. Nothing depends on someone remembering.
+      </p>
+      <a class="link link--lg" href="/app/" data-reveal data-cursor="Open">Team login <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="board__scene" aria-hidden="true">
+      <div class="mock" id="mock">
+        <div class="mock__bar"><i></i><i></i><i></i><span>OMorals Workspace — Video pipeline</span></div>
+        <div class="mock__cols">
+          <div class="mock__col"><h4>Script <b>2</b></h4>
+            <div class="mock__card"><u style="--c:var(--red)"></u><p>Why did the Chola navy vanish?</p><small>History · Long</small></div>
+            <div class="mock__card"><u style="--c:var(--green)"></u><p>Bujji &amp; Chinni Ep 9</p><small>Kathalu · Long</small></div>
+          </div>
+          <div class="mock__col"><h4>Editing <b>3</b></h4>
+            <div class="mock__card mock__card--lift"><u style="--c:var(--accent)"></u><p>The Lamp at Dawn</p><small>Kathalu · 2d in stage</small><div class="mock__prog"><span style="--w:55%"></span></div></div>
+            <div class="mock__card"><u style="--c:var(--blue)"></u><p>Comet, explained</p><small>Tinku · Short</small></div>
+            <div class="mock__card"><u style="--c:var(--red)"></u><p>Fall of the Nandas</p><small>History · Long</small></div>
+          </div>
+          <div class="mock__col"><h4>Review <b>1</b></h4>
+            <div class="mock__card"><u style="--c:var(--green)"></u><p>The Boy Who Carried the Sun</p><small>Kathalu · due Fri</small><div class="mock__prog"><span style="--w:82%"></span></div></div>
+          </div>
+          <div class="mock__col"><h4>Scheduled <b>2</b></h4>
+            <div class="mock__card"><u style="--c:var(--blue)"></u><p>Solar System</p><small>Sat · 4:00 pm</small><div class="mock__prog"><span style="--w:100%"></span></div></div>
+            <div class="mock__card"><u style="--c:var(--accent)"></u><p>Chittilata, 1996 vs today</p><small>Sun · 7:00 pm</small><div class="mock__prog"><span style="--w:100%"></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── Contact ───────────────────────── -->
+  <section class="contact" id="contact" data-scene="contact" data-glow="orange">
+    <p class="eyebrow"><i></i>Start a project</p>
+    <h2 class="contact__title" data-split>Let's make something<br>worth <em>talking about.</em></h2>
+
+    <div class="contact__grid">
+      <form class="form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" maxlength="80" required placeholder="What should we call you?">
+        </div>
+        <div class="field">
+          <label for="f-contact">Email or phone</label>
+          <input id="f-contact" name="contact" type="text" autocomplete="email" maxlength="120" required placeholder="Where can we reach you?">
+        </div>
+        <fieldset class="field">
+          <legend>What do you need?</legend>
+          <div class="pick">
+            <label><input type="radio" name="service" value="youtube"><span>YouTube</span></label>
+            <label><input type="radio" name="service" value="marketing"><span>Marketing</span></label>
+            <label><input type="radio" name="service" value="development"><span>Website / app</span></label>
+            <label><input type="radio" name="service" value="other" checked><span>Not sure yet</span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="f-message">A few lines about it</label>
+          <textarea id="f-message" name="message" rows="3" maxlength="2000" placeholder="The goal, the deadline, anything useful."></textarea>
+        </div>
+        <!-- honeypot: real people never fill this -->
+        <input class="hp" type="text" name="company_site" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="form__foot">
+          <button class="btn btn--lg" type="submit" data-magnetic><span class="btn__text">Send it</span><span class="btn__icon" aria-hidden="true">↗</span></button>
+          <p class="form__note" id="formNote" role="status" aria-live="polite">We read every message ourselves.</p>
+        </div>
+      </form>
+
+      <div class="contact__side">
+        <a class="reach" href="mailto:info@omorals.com" data-cursor="Write">
+          <small>Email</small><span>info@omorals.com</span>
+        </a>
+        <a class="reach" href="https://wa.me/917093599788" target="_blank" rel="noopener" data-cursor="Chat">
+          <small>WhatsApp</small><span>+91 70935 99788</span>
+        </a>
+        <a class="reach" href="https://www.youtube.com/channel/UCdBiq4YsDqFGBrX1s1JCc4w" target="_blank" rel="noopener" data-cursor="Watch">
+          <small>YouTube</small><span>Original Morals</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ───────────────────────── Footer ───────────────────────── -->
+<footer class="footer" data-scene="footer">
+  <div class="footer__row">
+    <p>© <span id="year">2026</span> OMorals Media</p>
+    <p class="footer__clock">India · <span id="clock">--:--</span> IST</p>
+    <nav aria-label="Footer">
+      <a href="#youtube">YouTube</a>
+      <a href="#marketing">Marketing</a>
+      <a href="#apps">Apps</a>
+      <a href="/app/">Team login</a>
+    </nav>
+    <a class="footer__top" href="#top" data-magnetic aria-label="Back to top">↑</a>
+  </div>
+  <div class="footer__word" aria-hidden="true">
+    <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="6"/><path d="M17 13.5 L28 20 L17 26.5 Z" fill="var(--accent)"/></svg><span>Morals</span>
+  </div>
+</footer>
+
+<noscript><style>.loader{display:none}html.is-loading{overflow:auto}.line__in{transform:none!important}</style></noscript>
+
+<script src="/vendor/gsap.min.js" defer></script>
+<script src="/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/vendor/SplitText.min.js" defer></script>
+<script src="/vendor/lenis.min.js" defer></script>
+<script src="/js/main.js" defer></script>
+<script type="module" src="/js/scene.js"></script>
+</body>
+</html>
