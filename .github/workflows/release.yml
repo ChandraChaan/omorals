@@ -1,0 +1,99 @@
+name: Release
+
+# Pushing a version tag (for example v2.0.0) builds the site and workspace
+# once and publishes:
+#   - a GitHub Release with the built web bundle attached
+#   - a container image on GitHub Packages: ghcr.io/chandrachaan/omorals
+#
+# To cut a release:
+#   1. set `version:` in pubspec.yaml and add a section to CHANGELOG.md
+#   2. git tag -a v2.1.0 -m "v2.1.0" && git push origin v2.1.0
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write # create the release and attach files
+  packages: write # push the container image
+
+env:
+  FLUTTER_VERSION: "3.44.5"
+  IMAGE: ghcr.io/chandrachaan/omorals
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Read version
+        id: v
+        run: |
+          TAG="$GITHUB_REF_NAME"
+          VERSION="${TAG#v}"
+          PUBSPEC="$(grep -E '^version:' pubspec.yaml | sed -E 's/version: *([0-9.]+).*/\1/')"
+          if [ "$VERSION" != "$PUBSPEC" ]; then
+            echo "::error::Tag $TAG does not match the version in pubspec.yaml ($PUBSPEC)"
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Analyze and test
+        run: |
+          flutter pub get
+          flutter analyze --no-fatal-infos
+          flutter test
+
+      - name: Build website + workspace
+        run: tool/build.sh
+
+      - name: Package the web bundle
+        run: |
+          (cd dist && zip -q -r "../omorals-web-${{ steps.v.outputs.version }}.zip" .)
+          sha256sum "omorals-web-${{ steps.v.outputs.version }}.zip" > SHA256SUMS.txt
+          ls -lh omorals-web-*.zip
+
+      - name: Build the container image
+        run: |
+          docker build \
+            --label "org.opencontainers.image.version=${{ steps.v.outputs.version }}" \
+            --label "org.opencontainers.image.revision=${{ github.sha }}" \
+            -t "$IMAGE:${{ steps.v.outputs.version }}" -t "$IMAGE:latest" .
+
+      - name: Smoke-test the image
+        run: |
+          docker run -d --name smoke -p 8080:80 "$IMAGE:${{ steps.v.outputs.version }}"
+          for i in $(seq 1 20); do curl -fs -o /dev/null http://localhost:8080/ && break; sleep 1; done
+          code() { curl -s -o /dev/null -w '%{http_code}' "http://localhost:8080$1"; }
+          test "$(code /)" = 200
+          test "$(code /app/)" = 200
+          test "$(code /app/tasks/deep-link)" = 200
+          test "$(code /videos.json)" = 200
+          test "$(code /no-such-page)" = 404
+          curl -s http://localhost:8080/ | grep -q "OMorals Media"
+          docker rm -f smoke
+
+      - name: Push the image to GitHub Packages
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker push "$IMAGE:${{ steps.v.outputs.version }}"
+          docker push "$IMAGE:latest"
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.v.outputs.tag }}
+        run: |
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "$TAG" --generate-notes
+          gh release upload "$TAG" "omorals-web-${{ steps.v.outputs.version }}.zip" SHA256SUMS.txt --clobber

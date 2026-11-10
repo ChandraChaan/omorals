@@ -65,6 +65,27 @@ tool/setup_ci.sh
 
 Until that has been run, the workflow builds and tests but skips the deploy steps.
 
+## Versions and releases
+
+The version is the `version:` line in `pubspec.yaml`; history is in [`CHANGELOG.md`](CHANGELOG.md).
+
+To cut a release, bump the version, add a changelog section, then tag and push:
+
+```bash
+git tag -a v2.1.0 -m "v2.1.0" && git push origin v2.1.0
+```
+
+[`.github/workflows/release.yml`](.github/workflows/release.yml) then builds everything once and publishes:
+
+- a **GitHub Release** with the built web bundle (`omorals-web-<version>.zip`) attached
+- a **container image** on GitHub Packages, which serves the same site with nginx:
+
+```bash
+docker run -p 8080:80 ghcr.io/chandrachaan/omorals:latest
+```
+
+The image talks to the same Firebase project as the live site, so the workspace inside it shows real data.
+
 ## Editing the website
 
 - Copy and sections: `site/index.html`
