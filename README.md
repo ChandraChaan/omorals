@@ -54,7 +54,16 @@ To work on the website alone: `python3 -m http.server 4173 --directory site`.
 - push to `main` → analyze, test, build, deploy live
 - pull request → analyze, test, build, preview URL in the job summary
 - every morning (07:00 IST) → rebuild so the site's "Latest from the channel" is fresh
-- needs one repository secret, `FIREBASE_SERVICE_ACCOUNT_OMORALS` (a deploy-only service account key)
+- keyless: GitHub signs in to Google with Workload Identity Federation, so there is no secret to store or rotate
+
+One-time switch-on (creates a deploy-only service account that only this repository can use):
+
+```bash
+gcloud auth login
+tool/setup_ci.sh
+```
+
+Until that has been run, the workflow builds and tests but skips the deploy steps.
 
 ## Editing the website
 
