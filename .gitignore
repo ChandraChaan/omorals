@@ -43,3 +43,15 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Build output and local tooling
+/dist/
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+.claude/
+*.serviceaccount.json
+
+# Golden-test failure output
+test/failures/

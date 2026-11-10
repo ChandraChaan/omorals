@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Page not found — OMorals Media</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Instrument+Serif:ital@1&family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: grid; place-items: center; padding: 24px; box-sizing: border-box;
+      background: radial-gradient(60vmax 60vmax at 85% 10%, rgba(255, 90, 31, .3), transparent 60%), #07080c;
+      color: #f3eee5; font-family: Manrope, system-ui, sans-serif; text-align: center;
+    }
+    svg { width: min(46vmin, 220px); animation: spin 14s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    h1 { margin: 28px 0 10px; font: 700 clamp(40px, 8vw, 88px)/.95 "Bricolage Grotesque", sans-serif; letter-spacing: -.05em; }
+    h1 em { font: italic 400 1.04em "Instrument Serif", serif; color: #ff5a1f; letter-spacing: -.02em; }
+    p { margin: 0 0 28px; color: #c9c4ba; }
+    a { display: inline-block; padding: 16px 26px; border-radius: 999px; background: #ff5a1f; color: #07080c; font-weight: 700; text-decoration: none; }
+    a:hover { background: #f3eee5; }
+    @media (prefers-reduced-motion: reduce) { svg { animation: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="none" stroke="#f3eee5" stroke-width="6" stroke-dasharray="70 18"/><path d="M17 13.5 L28 20 L17 26.5 Z" fill="#ff5a1f"/></svg>
+    <h1>This page went <em>off script.</em></h1>
+    <p>The link is broken or the page has moved.</p>
+    <a href="/">Back to the studio</a>
+  </main>
+</body>
+</html>

@@ -1,0 +1,78 @@
+name: Build and deploy
+
+# main            -> live site (https://omorals.web.app) + Firestore rules
+# pull requests   -> checks + a temporary preview URL in the job summary
+# every morning   -> rebuild so "Latest from the channel" shows new videos
+# manual          -> "Run workflow" button in the Actions tab
+#
+# Deploys are keyless (Workload Identity Federation): there is no secret to
+# rotate. Run tool/setup_ci.sh once to switch them on; until then this
+# workflow only builds and tests.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "30 1 * * *" # 07:00 IST
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  id-token: write # lets the job prove to Google which repository it is
+
+env:
+  FIREBASE_PROJECT: omorals
+  FLUTTER_VERSION: "3.44.5"
+  WIF_PROVIDER: projects/272701331042/locations/global/workloadIdentityPools/github/providers/github-oidc
+  DEPLOY_ACCOUNT: github-deploy@omorals.iam.gserviceaccount.com
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      # deploys are on, and this run is not from a fork
+      CAN_DEPLOY: ${{ vars.FIREBASE_DEPLOY == 'on' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Analyze and test
+        run: |
+          flutter pub get
+          flutter analyze --no-fatal-infos
+          flutter test
+
+      - name: Build website + workspace
+        run: tool/build.sh
+
+      - name: Sign in to Google Cloud
+        if: env.CAN_DEPLOY == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.DEPLOY_ACCOUNT }}
+
+      - name: Deploy live
+        if: env.CAN_DEPLOY == 'true' && github.event_name != 'pull_request'
+        run: npx --yes firebase-tools@15 deploy --project "$FIREBASE_PROJECT" --only hosting,firestore --non-interactive
+
+      - name: Deploy preview
+        if: env.CAN_DEPLOY == 'true' && github.event_name == 'pull_request'
+        run: |
+          npx --yes firebase-tools@15 hosting:channel:deploy "pr-${{ github.event.number }}" \
+            --project "$FIREBASE_PROJECT" --expires 7d --non-interactive --json > preview.json
+          URL=$(python3 -c "import json;d=json.load(open('preview.json'));print(next(iter(d['result'].values()))['url'])")
+          echo "### Preview: $URL" >> "$GITHUB_STEP_SUMMARY"
