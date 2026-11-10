@@ -6,9 +6,9 @@ rules_version = '2';
 // Depts    : youtube | marketing | development
 // Statuses : pending (just signed up) | active | disabled
 //
-// The very first person to sign in claims the workspace (meta/workspace) and
-// becomes the owner. Everyone after that starts as a pending member and can
-// see nothing until an owner/admin activates them.
+// The studio owner claims the workspace (meta/workspace) on their first
+// sign-in. Everyone else starts as a pending member and can see nothing until
+// an owner/admin activates them.
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -27,11 +27,24 @@ service cloud.firestore {
     }
     function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
 
+    // SHA-256 (hex) of the lower-cased email addresses allowed to claim an
+    // unclaimed workspace. Hashes, so the addresses themselves stay out of the
+    // repository. To allow another account:
+    //   printf '%s' 'name@example.com' | shasum -a 256
+    function mayClaimWorkspace() {
+      return request.auth.token.email_verified == true
+        && hashing.sha256(request.auth.token.email.lower()).toHexString().lower() in [
+          '1d1cded89fb4631b6753b1541a21d4b55823a29ca46c4ec21afff8afe35ec949',
+          'c575703abb2f14dc6ab277159257a1e9a4a3d04d5414931899d124da4137a7ef'
+        ];
+    }
+
     // ---- Workspace claim -------------------------------------------------
     match /meta/workspace {
       allow get: if signedIn();
-      // "create" can only succeed while the document does not exist yet.
-      allow create: if signedIn() && request.resource.data.ownerUid == uid();
+      // "create" can only succeed while the document does not exist yet, and
+      // only the studio owner's verified Google account may do it.
+      allow create: if signedIn() && request.resource.data.ownerUid == uid() && mayClaimWorkspace();
       allow update: if isAdmin() && request.resource.data.ownerUid == resource.data.ownerUid;
     }
 
@@ -77,13 +90,21 @@ service cloud.firestore {
       allow read: if active();
       allow create: if active() && request.resource.data.reporterId == uid();
       allow update: if isManager()
-        || (active() && (resource.data.assigneeId == uid() || resource.data.reporterId == uid()));
+        || (active() && (resource.data.assigneeId == uid() || resource.data.reporterId == uid()))
+        // anyone on the team may comment, so they may also nudge the comment counter by one
+        || (active() && changed().hasOnly(['commentCount', 'updatedAt'])
+            && request.resource.data.commentCount is int
+            && (request.resource.data.commentCount == resource.data.commentCount + 1
+                || request.resource.data.commentCount == resource.data.commentCount - 1));
       allow delete: if isManager() || (active() && resource.data.reporterId == uid());
 
       match /comments/{cid} {
         allow read: if active();
         allow create: if active() && request.resource.data.authorId == uid();
-        allow delete: if isManager() || (active() && resource.data.authorId == uid());
+        // author, a manager, or the task's reporter (so deleting a task can clean up its thread)
+        allow delete: if isManager()
+          || (active() && (resource.data.authorId == uid()
+              || get(/databases/$(database)/documents/tasks/$(id)).data.reporterId == uid()));
       }
     }
 

@@ -13,7 +13,7 @@ Backend is Firebase project **`omorals`**: Authentication (Google + email/passwo
 
 Roles: `owner` > `admin` > `manager` > `member`. Departments: `youtube`, `marketing`, `development`.
 
-- The **first person to sign in** claims the workspace and becomes the owner.
+- The **studio owner** claims the workspace on their first sign-in (Google sign-in with an account listed, as a hash, in `mayClaimWorkspace()` in the rules).
 - Everyone else who signs up is **pending** until an owner/admin approves them on the Team screen and picks their department and role.
 - Members see Tasks plus their department's screens. Callers only see **their own** leads and calls.
 - A call is stamped with the server's clock and cannot be edited or deleted by the caller afterwards.

@@ -52,3 +52,6 @@ firestore-debug.log
 ui-debug.log
 .claude/
 *.serviceaccount.json
+
+# Golden-test failure output
+test/failures/
